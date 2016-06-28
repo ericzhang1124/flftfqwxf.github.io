@@ -238,6 +238,128 @@
             
               
                 
+                <a class="post-title-link" href="/2016/06/28/defineProperty/" itemprop="url">
+                  Object.defineProperty用法
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-28T17:45:24+08:00" content="2016-06-28">
+              2016-06-28
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="官网描述如下"><a href="#官网描述如下" class="headerlink" title="官网描述如下:"></a>官网描述如下:</h3><p>Object.defineProperty() 方法直接在一个对象上定义一个新属性，或者修改一个已经存在的属性， 并返回这个对象。</p>
+<p>语法EDIT<br>Object.defineProperty(obj, prop, descriptor)<br>参数</p>
+<p>obj<br>需要定义属性的对象。<br>prop<br>需被定义或修改的属性名。<br>descriptor<br>需被定义或修改的属性的描述符。<br>描述<br>该方法允许精确添加或修改对象的属性。一般情况下，我们为对象添加属性是通过赋值来创建并显示在属性枚举中（for…in 或 Object.keys 方法）， 但这种方式添加的属性值可以被改变，也可以被删除。而使用 Object.defineProperty() 则允许改变这些额外细节的默认设置。例如，默认情况下，使用  Object.defineProperty() 增加的属性值是不可改变的。</p>
+<p>对象里目前存在的属性描述符有两种主要形式：数据描述符和存取描述符。数据描述符是一个拥有可写或不可写值的属性。存取描述符是由一对 getter-setter 函数功能来描述的属性。描述符必须是两种形式之一；不能同时是两者。</p>
+<p>数据描述符和存取描述符均具有以下可选键值：</p>
+<p>configurable<br>当且仅当该属性的 configurable 为 true 时，该属性才能够被改变，也能够被删除。默认为 false。<br>enumerable<br>当且仅当该属性的 enumerable 为 true 时，该属性才能够出现在对象的枚举属性中。默认为 false。<br>数据描述符同时具有以下可选键值：</p>
+<p>value<br>该属性对应的值。可以是任何有效的 JavaScript 值（数值，对象，函数等）。默认为 undefined。<br>writable<br>当且仅当仅当该属性的writable为 true 时，该属性才能被赋值运算符改变。默认为 false。<br>存取描述符同时具有以下可选键值：</p>
+<p>get<br>一个给属性提供 getter 的方法，如果没有 getter 则为 undefined。该方法返回值被用作属性值。默认为undefined。<br>set<br>一个给属性提供 setter 的方法，如果没有 setter 则为 undefined。该方法将接受唯一参数，并将该参数的新值分配给该属性。默认为undefined。<br>记住，这些选项不一定是自身属性，如果是继承来的也要考虑。为了确认保留这些默认值，你可能要在这之前冻结Object.prototype，明确指定所有的选项，或者将<strong>proto</strong>属性指向null。</p>
+<h3 id="下面作一下解释和对比"><a href="#下面作一下解释和对比" class="headerlink" title="下面作一下解释和对比:"></a>下面作一下解释和对比:</h3><h4 id="传统给对象设置属性的方式"><a href="#传统给对象设置属性的方式" class="headerlink" title="传统给对象设置属性的方式:"></a>传统给对象设置属性的方式:</h4><pre><code>var obj={};
+obj.o=1;
+</code></pre><p>1)属性是可以任意修改和删除的<br>2)可以通过for in ,Object.keys来循环遍历的<br>3)Object.assign可以复制到该属性</p>
+<p>使用Object.defineProperty添加属性:</p>
+<p>$[<a href="http://jsbin.com/yaduxa/edit" target="_blank" rel="external">http://jsbin.com/yaduxa/edit</a>]</p>
+<p>: <a href="https://github.com/assemble/handlebars-helpers#jsfiddle" target="_blank" rel="external">https://github.com/assemble/handlebars-helpers#jsfiddle</a></p>
+<pre><code>var obj={};
+Object.defineProperty(obj,&quot;username&quot;,{
+  value:&apos;name&apos;,
+  //为true时，才允许被删除
+  configurable:false,
+  //为true时，该属性才能够出现在对象的枚举属性中
+  //出现在对象的枚举属性中，才可以被Object.assign复制
+  //了现在对象的枚举属性中，才可能出现在for in循环中
+  enumerable:false,
+  //为true时，才允许被修改
+  writable:true
+})
+//为true时，才允许被删除
+</code></pre><p>总结:可以通过Object.defineProperty来设置私有属性</p>
+<p>以上是Object.defineProperty数据描述符用</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/06/22/assign/" itemprop="url">
                   assign
                 </a>
@@ -454,13 +576,20 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">2</span>
+              <span class="site-state-item-count">3</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           
 
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
           
 
         </nav>
