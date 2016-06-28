@@ -65,7 +65,7 @@ set
 3)Object.assign可以复制到该属性
 
 
-使用Object.defineProperty添加属性:
+#### 使用Object.defineProperty添加属性:
 
     var obj={};
     Object.defineProperty(obj,"username",{
