@@ -60,7 +60,7 @@ set
 使用Object.defineProperty添加属性:
 
 
-<a class="jsbin-embed" href="https://jsbin.com/yaduxa/embed?html,js,console"> es6  DEMO on jsbin.com</a><script src="https://static.jsbin.com/js/embed.min.js?3.36.10"></script>
+<a class="jsbin-embed" href="http://jsbin.com/yaduxa/embed?html,js,console"> es6  DEMO on jsbin.com</a><script src="http://static.jsbin.com/js/embed.min.js?3.36.10"></script>
 
  
  
