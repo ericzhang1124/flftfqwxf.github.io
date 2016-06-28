@@ -175,3 +175,4 @@ js:
 而要在IE8以及下实现动态绑定需要使用 VBSCRIPT
 
 
+参考文档:https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty
