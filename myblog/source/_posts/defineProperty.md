@@ -59,12 +59,38 @@ set
 
 使用Object.defineProperty添加属性:
 
+    var obj={};
+    Object.defineProperty(obj,"username",{
+      value:'name',
+      //为true时，才允许被删除
+      configurable:false,
+      //为true时，该属性才能够出现在对象的枚举属性中
+      //出现在对象的枚举属性中，才可以被Object.assign复制
+      //了现在对象的枚举属性中，才可能出现在for in循环中
+      enumerable:false,
+      //为true时，才允许被修改
+      writable:true
+    })
+    obj.username="update"
+    //delete obj.username
+    //
+    console.log(obj.username)
+    //如果 [enumerable]时为false,则无法在循环中
+    //即不能在for in 和 Object.keys()中获取到
+    for(var item in obj){
+      console.log(item)
+    }
+    //如果 [enumerable]时为false,复制的对象不会有username属性，因为 Object.assign只复制枚举属性中的属性
+    
+    var copyObj=Object.assign({},obj);
+    console.log(copyObj.username)
 
-<a class="jsbin-embed" href="http://jsbin.com/yaduxa/embed?html,js,console"> es6  DEMO on jsbin.com</a><script src="http://static.jsbin.com/js/embed.min.js?3.36.10"></script>
+
+你可以修改<a class="jsbin-embed" href="http://jsbin.com/yaduxa/embed?html,js,console">在线示例1</a>,查看不同效果
 
  
  
-总结:可以通过Object.defineProperty来设置私有属性
+**总结:可以通过Object.defineProperty来设置私有属性**
 
 以上是Object.defineProperty数据描述符用
 
