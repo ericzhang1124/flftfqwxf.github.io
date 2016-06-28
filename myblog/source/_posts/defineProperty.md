@@ -90,10 +90,80 @@ set
 
  
  
-**总结:可以通过Object.defineProperty来设置私有属性**
+**总结:可以通过Object.defineProperty来设置私有属性,不允许被修改,被删除,被复制等操作**
 
-以上是Object.defineProperty数据描述符用
+### 存取描述符
+
+get
+一个给属性提供 getter 的方法，如果没有 getter 则为 undefined。该方法返回值被用作属性值。默认为undefined。
+set
+一个给属性提供 setter 的方法，如果没有 setter 则为 undefined。该方法将接受唯一参数，并将该参数的新值分配给该属性。默认为undefined。
+
+Object.defineProperty最常用的功能是,通过GET,SET来实现数据的动态绑定,现在流行的数据响应式,双向数据绑定皆是基于此,如:
+
+html:
+
+    <!DOCTYPE html>
+    <html >
+    <head>
+
+      <meta charset="utf-8">
+      <title> es6  DEMO</title>
+    </head>
+    <body >
 
 
+      Object.defineProperty 存储描述符 DEMO
+
+      <br><br><br>
+      <div class="automatic">3333</div>
+      <input type="text" id="myname">
+
+    </body>
+    </html>
+
+
+js:
+
+    var obj={};
+    var bVal;
+
+    Object.defineProperty(obj,"username",{
+      //当存在get,set时，不能同时存在value,两者不能同时存在
+     // value:'name',
+      //为true时，才允许被删除
+      configurable:true,
+      //为true时，该属性才能够出现在对象的枚举属性中
+      //出现在对象的枚举属性中，才可以被Object.assign复制
+      //了现在对象的枚举属性中，才可能出现在for in循环中
+      enumerable:true,
+      //为true时，才允许被修改
+      //当存在get,set时，不能同时存在value,两者不能同时存在
+     // writable:true,
+      get:function(){
+        console.log('get val');
+        return bVal
+      },set:function(newVal){
+        console.log('set val');
+        var container=document.querySelector('.automatic');
+        container.innerHTML=newVal;
+        bVal=newVal
+      }
+    });
+    //实现简单的数据响应式绑定
+    document.addEventListener("DOMContentLoaded", function(event) {
+      var myname=document.querySelector('#myname');
+        myname.
+        addEventListener('input',function(){
+          obj.username=this.value
+        })
+    });
+
+
+
+查看<a class="jsbin-embed" href="http://jsbin.com/yimezug/embed?html,js,console,output">在线示例</a>
+
+注意:Object.definePropery,的get,set只支持IE9及以及。
+而要在IE8以及下实现动态绑定需要使用 VBSCRIPT
 
 
