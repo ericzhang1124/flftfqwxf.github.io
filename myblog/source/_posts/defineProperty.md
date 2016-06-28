@@ -94,7 +94,7 @@ set
     console.log(copyObj.username)
 
 
-你可以修改<a class="jsbin-embed" href="http://jsbin.com/yaduxa/embed?html,js,console">在线示例1</a>,查看不同效果
+你可以修改<a class="jsbin-embed" href="http://jsbin.com/yaduxa/embed?html,js,console,output">在线示例</a>,查看不同效果
 
  
  
@@ -169,7 +169,7 @@ js:
 
 
 
-查看<a class="jsbin-embed" href="http://jsbin.com/yimezug/embed?html,js,console,output">在线示例</a>
+查看<a class="jsbin-embed" href="http://jsbin.com/yimezug/embed">在线示例</a>
 
 注意:Object.definePropery,的get,set只支持IE9及以及。
 而要在IE8以及下实现动态绑定需要使用 VBSCRIPT
