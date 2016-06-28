@@ -51,6 +51,14 @@ set
     var obj={};
     obj.o=1;
 
+    // 等同于 :
+    Object.defineProperty(o, "a", {
+      value : 1,
+      writable : true,
+      configurable : true,
+      enumerable : true
+    });
+
 
 1)属性是可以任意修改和删除的
 2)可以通过for in ,Object.keys来循环遍历的

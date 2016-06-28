@@ -292,6 +292,14 @@
 <p>get<br>一个给属性提供 getter 的方法，如果没有 getter 则为 undefined。该方法返回值被用作属性值。默认为undefined。<br>set<br>一个给属性提供 setter 的方法，如果没有 setter 则为 undefined。该方法将接受唯一参数，并将该参数的新值分配给该属性。默认为undefined。<br>记住，这些选项不一定是自身属性，如果是继承来的也要考虑。为了确认保留这些默认值，你可能要在这之前冻结Object.prototype，明确指定所有的选项，或者将<strong>proto</strong>属性指向null。</p>
 <h3 id="下面作一下解释和对比"><a href="#下面作一下解释和对比" class="headerlink" title="下面作一下解释和对比:"></a>下面作一下解释和对比:</h3><h4 id="传统给对象设置属性的方式"><a href="#传统给对象设置属性的方式" class="headerlink" title="传统给对象设置属性的方式:"></a>传统给对象设置属性的方式:</h4><pre><code>var obj={};
 obj.o=1;
+
+// 等同于 :
+Object.defineProperty(o, &quot;a&quot;, {
+  value : 1,
+  writable : true,
+  configurable : true,
+  enumerable : true
+});
 </code></pre><p>1)属性是可以任意修改和删除的<br>2)可以通过for in ,Object.keys来循环遍历的<br>3)Object.assign可以复制到该属性</p>
 <p>使用Object.defineProperty添加属性:</p>
 <pre><code>var obj={};
