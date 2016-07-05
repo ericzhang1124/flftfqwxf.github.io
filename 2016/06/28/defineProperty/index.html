@@ -1,0 +1,666 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="javascrpt," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="官网描述如下:Object.defineProperty() 方法直接在一个对象上定义一个新属性，或者修改一个已经存在的属性， 并返回这个对象。
+语法EDITObject.defineProperty(obj, prop, descriptor)参数
+obj需要定义属性的对象。prop需被定义或修改的属性名。descriptor需被定义或修改的属性的描述符。描述该方法允许精确添加或修改对象的属性。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Object.defineProperty用法">
+<meta property="og:url" content="http://yoursite.com/2016/06/28/defineProperty/index.html">
+<meta property="og:site_name" content="猫宅的@橱窗">
+<meta property="og:description" content="官网描述如下:Object.defineProperty() 方法直接在一个对象上定义一个新属性，或者修改一个已经存在的属性， 并返回这个对象。
+语法EDITObject.defineProperty(obj, prop, descriptor)参数
+obj需要定义属性的对象。prop需被定义或修改的属性名。descriptor需被定义或修改的属性的描述符。描述该方法允许精确添加或修改对象的属性。">
+<meta property="og:updated_time" content="2016-06-30T15:01:42.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Object.defineProperty用法">
+<meta name="twitter:description" content="官网描述如下:Object.defineProperty() 方法直接在一个对象上定义一个新属性，或者修改一个已经存在的属性， 并返回这个对象。
+语法EDITObject.defineProperty(obj, prop, descriptor)参数
+obj需要定义属性的对象。prop需被定义或修改的属性名。descriptor需被定义或修改的属性的描述符。描述该方法允许精确添加或修改对象的属性。">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/06/28/defineProperty/"/>
+
+  <title> Object.defineProperty用法 | 猫宅的@橱窗 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">猫宅的@橱窗</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Object.defineProperty用法
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-28T17:45:24+08:00" content="2016-06-28">
+              2016-06-28
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="官网描述如下"><a href="#官网描述如下" class="headerlink" title="官网描述如下:"></a>官网描述如下:</h3><p>Object.defineProperty() 方法直接在一个对象上定义一个新属性，或者修改一个已经存在的属性， 并返回这个对象。</p>
+<p>语法EDIT<br>Object.defineProperty(obj, prop, descriptor)<br>参数</p>
+<p>obj<br>需要定义属性的对象。<br>prop<br>需被定义或修改的属性名。<br>descriptor<br>需被定义或修改的属性的描述符。<br>描述<br>该方法允许精确添加或修改对象的属性。一般情况下，我们为对象添加属性是通过赋值来创建并显示在属性枚举中（for…in 或 Object.keys 方法）， 但这种方式添加的属性值可以被改变，也可以被删除。而使用 Object.defineProperty() 则允许改变这些额外细节的默认设置。例如，默认情况下，使用  Object.defineProperty() 增加的属性值是不可改变的。</p>
+<p>对象里目前存在的属性描述符有两种主要形式：数据描述符和存取描述符。数据描述符是一个拥有可写或不可写值的属性。存取描述符是由一对 getter-setter 函数功能来描述的属性。描述符必须是两种形式之一；不能同时是两者。</p>
+<p>数据描述符和存取描述符均具有以下可选键值：</p>
+<p>configurable<br>当且仅当该属性的 configurable 为 true 时，该属性才能够被改变，也能够被删除。默认为 false。<br>enumerable<br>当且仅当该属性的 enumerable 为 true 时，该属性才能够出现在对象的枚举属性中。默认为 false。<br>数据描述符同时具有以下可选键值：</p>
+<p>value<br>该属性对应的值。可以是任何有效的 JavaScript 值（数值，对象，函数等）。默认为 undefined。<br>writable<br>当且仅当仅当该属性的writable为 true 时，该属性才能被赋值运算符改变。默认为 false。<br>存取描述符同时具有以下可选键值：</p>
+<p>get<br>一个给属性提供 getter 的方法，如果没有 getter 则为 undefined。该方法返回值被用作属性值。默认为undefined。<br>set<br>一个给属性提供 setter 的方法，如果没有 setter 则为 undefined。该方法将接受唯一参数，并将该参数的新值分配给该属性。默认为undefined。<br>记住，这些选项不一定是自身属性，如果是继承来的也要考虑。为了确认保留这些默认值，你可能要在这之前冻结Object.prototype，明确指定所有的选项，或者将<strong>proto</strong>属性指向null。</p>
+<h3 id="下面作一下解释和对比"><a href="#下面作一下解释和对比" class="headerlink" title="下面作一下解释和对比:"></a>下面作一下解释和对比:</h3><h4 id="传统给对象设置属性的方式"><a href="#传统给对象设置属性的方式" class="headerlink" title="传统给对象设置属性的方式:"></a>传统给对象设置属性的方式:</h4><pre><code>var obj={};
+obj.o=1;
+
+// 等同于 :
+Object.defineProperty(o, &quot;a&quot;, {
+  value : 1,
+  writable : true,
+  configurable : true,
+  enumerable : true
+});
+</code></pre><p>1)属性是可以任意修改和删除的<br>2)可以通过for in ,Object.keys来循环遍历的<br>3)Object.assign可以复制到该属性</p>
+<h4 id="使用Object-defineProperty添加属性"><a href="#使用Object-defineProperty添加属性" class="headerlink" title="使用Object.defineProperty添加属性:"></a>使用Object.defineProperty添加属性:</h4><pre><code>var obj={};
+Object.defineProperty(obj,&quot;username&quot;,{
+  value:&apos;name&apos;,
+  //为true时，才允许被删除
+  configurable:false,
+  //为true时，该属性才能够出现在对象的枚举属性中
+  //出现在对象的枚举属性中，才可以被Object.assign复制
+  //了现在对象的枚举属性中，才可能出现在for in循环中
+  enumerable:false,
+  //为true时，才允许被修改
+  writable:true
+})
+obj.username=&quot;update&quot;
+//delete obj.username
+//
+console.log(obj.username)
+//如果 [enumerable]时为false,则无法在循环中
+//即不能在for in 和 Object.keys()中获取到
+for(var item in obj){
+  console.log(item)
+}
+//如果 [enumerable]时为false,复制的对象不会有username属性，因为 Object.assign只复制枚举属性中的属性
+
+var copyObj=Object.assign({},obj);
+console.log(copyObj.username)
+</code></pre><p>你可以修改<a class="jsbin-embed" href="http://jsbin.com/yaduxa/embed?html,js,console,output" target="_blank" rel="external">在线示例</a>,查看不同效果</p>
+<p><strong>总结:可以通过Object.defineProperty来设置私有属性,不允许被修改,被删除,被复制等操作</strong></p>
+<h3 id="存取描述符"><a href="#存取描述符" class="headerlink" title="存取描述符"></a>存取描述符</h3><p>get<br>一个给属性提供 getter 的方法，如果没有 getter 则为 undefined。该方法返回值被用作属性值。默认为undefined。<br>set<br>一个给属性提供 setter 的方法，如果没有 setter 则为 undefined。该方法将接受唯一参数，并将该参数的新值分配给该属性。默认为undefined。</p>
+<p>Object.defineProperty最常用的功能是,通过GET,SET来实现数据的动态绑定,现在流行的数据响应式,双向数据绑定皆是基于此,如:</p>
+<p>html:</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html &gt;
+&lt;head&gt;
+
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;title&gt; es6  DEMO&lt;/title&gt;
+&lt;/head&gt;
+&lt;body &gt;
+
+
+  Object.defineProperty 存储描述符 DEMO
+
+  &lt;br&gt;&lt;br&gt;&lt;br&gt;
+  &lt;div class=&quot;automatic&quot;&gt;3333&lt;/div&gt;
+  &lt;input type=&quot;text&quot; id=&quot;myname&quot;&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p>js:</p>
+<pre><code>var obj={};
+var bVal;
+
+Object.defineProperty(obj,&quot;username&quot;,{
+  //当存在get,set时，不能同时存在value,两者不能同时存在
+ // value:&apos;name&apos;,
+  //为true时，才允许被删除
+  configurable:true,
+  //为true时，该属性才能够出现在对象的枚举属性中
+  //出现在对象的枚举属性中，才可以被Object.assign复制
+  //了现在对象的枚举属性中，才可能出现在for in循环中
+  enumerable:true,
+  //为true时，才允许被修改
+  //当存在get,set时，不能同时存在value,两者不能同时存在
+ // writable:true,
+  get:function(){
+    console.log(&apos;get val&apos;);
+    return bVal
+  },set:function(newVal){
+    console.log(&apos;set val&apos;);
+    var container=document.querySelector(&apos;.automatic&apos;);
+    container.innerHTML=newVal;
+    bVal=newVal
+  }
+});
+//实现简单的数据响应式绑定
+document.addEventListener(&quot;DOMContentLoaded&quot;, function(event) {
+  var myname=document.querySelector(&apos;#myname&apos;);
+    myname.
+    addEventListener(&apos;input&apos;,function(){
+      obj.username=this.value
+    })
+});
+</code></pre><p>查看<a class="jsbin-embed" href="http://jsbin.com/yimezug/embed" target="_blank" rel="external">在线示例</a></p>
+<p>注意:Object.definePropery,的get,set只支持IE9及以及。<br>而要在IE8以及下实现动态绑定需要使用 VBSCRIPT</p>
+<p>参考文档:<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty" target="_blank" rel="external">https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/javascrpt/" rel="tag">#javascrpt</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/06/22/assign/" rel="next" title="assign">
+                <i class="fa fa-chevron-left"></i> assign
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/07/05/intellijerror/" rel="prev" title="intellij IDEA 错误:requested without authorization, you can copy URL and open it in browser to trust it.解决办法">
+                intellij IDEA 错误:requested without authorization, you can copy URL and open it in browser to trust it.解决办法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="沧浪的羽毛" />
+          <p class="site-author-name" itemprop="name">沧浪的羽毛</p>
+          <p class="site-description motion-element" itemprop="description">自律强于努力</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#官网描述如下"><span class="nav-number">1.</span> <span class="nav-text">官网描述如下:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#下面作一下解释和对比"><span class="nav-number">2.</span> <span class="nav-text">下面作一下解释和对比:</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#传统给对象设置属性的方式"><span class="nav-number">2.1.</span> <span class="nav-text">传统给对象设置属性的方式:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用Object-defineProperty添加属性"><span class="nav-number">2.2.</span> <span class="nav-text">使用Object.defineProperty添加属性:</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#存取描述符"><span class="nav-number">3.</span> <span class="nav-text">存取描述符</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">沧浪的羽毛</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>
