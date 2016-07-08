@@ -97,3 +97,116 @@ tags: javascript es6
     };
     }
 
+### 箭头函数的this指针:
+
+很多文章说,箭头函数的this是固定的,并且函数体内的this对象，就是定义时所在的对象，而不是使用时所在的对象,这个一直是似懂非懂。下面做一下疏理。
+
+如下代码:
+
+    function foo(r) {
+
+      setTimeout(() => {
+        console.log('=>'+this);
+      }, 100);
+    }
+    foo.call({r:1});
+    foo()
+    new foo()
+    function foo2(r) {
+      setTimeout(function() {
+        console.log('not arrow:'+this);
+      }, 100);
+      }
+    foo2.call({r:1})
+    new foo2()
+
+运行会发现,foo的运行结果 this是变化的, 而 foo2运行时的this,反而是不变的。
+原因是什么??
+
+
+关键在于【定义时】和【运行时】,如何简单区分【定义时】和【运行时】,以一个方法为例:
+
+    function a(){
+      b+c
+    }
+
+首先,【编译时】会解析a方法是否有语法错误,在这个方法中,但是如果不执行 a(),并不会报错,说明b和c在此时并没有被初始化,即不在【定义时】,
+而当执行a() 时,是方法a的【运行时】,但对于a内部的b,c才开始【定义时】,故会检查到b,c不存在报错
+
+将上面代码作下注释:
+
+    function foo(r) {
+
+      //setTimeout的定义是在foo执行时，即如果没有调用foo方法，即setTimeout根本没有定义，此点一定要记清楚
+      setTimeout(() => {
+        console.log('=>'+this);
+      }, 100);
+    }
+
+    //foo调用并指定了通过call指定this为{r:1}
+    //运行到内部setTimeout开始定义，故此时箭头函数内的this就是 {r:1}
+    foo.call({r:1});
+    //直接调用 foo执行内部this指向window,setTimeout开始定义时，也就指向了window
+    foo()
+    //运行foo时，this指向foo内部
+    new foo()
+
+    function foo2(r) {
+
+      setTimeout(function() {
+        console.log('not arrow:'+this);
+      }, 100);
+      }
+
+    foo2.call({r:1})
+    new foo2()
+
+
+根据上面注释,说明一定要先确认什么时候才是定义时,什么时候是运行时,foo()是foo本身的运行时,但内部的setTimeout是在foo()调用之后才开始初始化定义的,故foo执行时的this是什么就会影响到setTimeout的箭头函数的this。
+
+####再看两个示例:
+
+此示例说明,箭头函数的this是不变的:
+
+    var adder = {
+      base : 1,
+
+      add : function(a) {
+        var f = v => v + this.base;
+        return f(a);
+      },
+
+      addThruCall: function(a) {
+        var f = v => v + this.base;
+        var b = {
+          base : 2
+        };
+        //这里的b改变了 this但并不会影响到 f函数
+        return f.call(b, a);
+      }
+    };
+    console.log(adder.add(1));         // 输出 2
+    console.log(adder.addThruCall(1)); // 仍然输出 2（而不是3）
+
+
+在上面示例中,adder.addThruCall(1)执行时,f才开始初始化定义,并且此时的this指向adder对象,而箭头函数的初化后定义后this指向即固定,所以即使在后面使用【f.call(b, a)】修改this也无效
+
+简单示例:
+
+    var f = () => {
+      console.log(this)
+    };
+
+    f.call({r:1})//this 依然为window
+
+
+严格模式下,箭头函数的this 规则将被忽略:
+
+
+    var f = () => {'use strict'; return this};
+    console.log('arror:'+f())
+
+    var f2 = function ()
+    {'use strict'; return this};
+    console.log('no arrow:'+f2())
+
