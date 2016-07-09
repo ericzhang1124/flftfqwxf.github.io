@@ -286,7 +286,6 @@
 <p>简单的说,middleware就是给redux提供额外的外置功能,可以理解为插件,大至有以下特点:<br>1)它是全局的,middleware是添加到redux的实例上,而一般一个应用只有一个redux store,所以在一个sotre上添加了某个middleware,所有这个应用都会经过这个middleware<br>2)middleware,可以理解为插件,是可插拔的,定义了一个middleware,如果不使用,就与应用程序没有任何关系</p>
 <h3 id="middleware-如何实现"><a href="#middleware-如何实现" class="headerlink" title="middleware 如何实现?"></a>middleware 如何实现?</h3><p>写一个 middleware,需要理解以下知识:</p>
 <p>1)有一定函数式编程理解<br>2)ES6箭头函数嵌套</p>
-<p>####中间件的流程:</p>
 <p> 定义中间件:</p>
 <pre><code>var thunkMiddleware = function ({dispatch, getState}) {
     // console.log(&apos;Enter thunkMiddleware&apos;);
