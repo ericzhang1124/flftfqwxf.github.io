@@ -238,6 +238,167 @@
             
               
                 
+                <a class="post-title-link" href="/2016/07/09/redux-middleware/" itemprop="url">
+                  redux middleware 中间件
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-09T10:49:05+08:00" content="2016-07-09">
+              2016-07-09
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>###redux middleware是什么?</p>
+<p>简单的说,middleware就是给redux提供额外的外置功能,可以理解为插件,大至有以下特点:<br>1)它是全局的,middleware是添加到redux的实例上,而一般一个应用只有一个redux store,所以在一个sotre上添加了某个middleware,所有这个应用都会经过这个middleware<br>2)middleware,可以理解为插件,是可插拔的,定义了一个middleware,如果不使用,就与应用程序没有任何关系</p>
+<h3 id="middleware-如何实现"><a href="#middleware-如何实现" class="headerlink" title="middleware 如何实现?"></a>middleware 如何实现?</h3><p>写一个 middleware,需要理解以下知识:</p>
+<p>1)有一定函数式编程理解<br>2)ES6箭头函数嵌套</p>
+<p>####中间件的流程:</p>
+<p> 定义中间件:</p>
+<pre><code>var thunkMiddleware = function ({dispatch, getState}) {
+    // console.log(&apos;Enter thunkMiddleware&apos;);
+    //此处的next 是 下一个插件,或 store.dispatch
+    return function (next) {
+        // console.log(&apos;Function &quot;next&quot; provided:&apos;, next);
+        // action 为 调用 store.dispatch时的 action
+        //store.dispatch调用时,将会使用这个方法
+        return function (action) {
+            console.log(&apos;this is dispatch&apos;)
+          //  console.log(&apos;Handling action:&apos;, action);
+            //如果是function则表示为 actioncreator 异步
+            if (typeof action === &apos;function&apos;) {
+                return action(dispatch, getState)
+            } else {
+                //如果action是一个action对象则调用到 reducer
+                next(action)
+            }
+        }
+    }
+}
+</code></pre><p>初始化实例:</p>
+<pre><code>import {createStore, combineReducers, applyMiddleware} from &apos;redux&apos;
+//applyMiddleware(thunkMiddleware,logger) 返回一个方法,并以createStore为参数,执行后返回一个store实例
+//其主要作用是把中间件参数值,放入到返回的函数中
+//这是函数式编程的写法,每次调用都返回一个新的函数,并把每次调用的参数都缓存到每个新返回的函数中
+//在这里相当于重写了 createStore方法,之后使用 finalCreateStore来代替createStore实例化store
+//之所以要重写 createStore,根据 applyMiddleware中源码得知,是为了重写dispatch
+const finalCreateStore = applyMiddleware(thunkMiddleware,logger)(createStore)
+</code></pre><p>调用 dispatch:</p>
+<pre><code>var asyncSayActionCreator_1 = function (message) {
+    return function (dispatch) {
+        setTimeout(function () {
+            console.log(new Date(), &apos;Dispatch action now:&apos;)
+            dispatch({
+                type: &apos;SAY&apos;,
+                message
+            })
+        }, 2000)
+    }
+}
+//在此处调用的 dispath,不是redux默认的dispatch,而是applyMiddleware 重构后的 dispatch
+store_0.dispatch(asyncSayActionCreator_1(&apos;Hi&apos;))
+</code></pre><p>中间件的固定格式:</p>
+<pre><code>/**
+ * {dispatch,getState} 为createStore后的 store实例能数中的两个
+ * next  是 下一个插件的 action,或 store.dispatch
+ * action
+ * 每个插件都必须执行 next(action) 以继续后续的操作
+ */
+const logger=({dispatch,getState})=&gt;next=&gt;action=&gt;{
+    console.log(&apos;loger:&apos;,action.type);
+    let result=next(action);
+   console.log(&apos;loger&apos;,getState());
+
+}
+//此代码与上面等同
+const logger=store=&gt;next=&gt;action=&gt;{
+        console.log(&apos;loger:&apos;,action.type);
+        let result=next(action);
+       console.log(&apos;loger&apos;,store.getState());
+
+    }
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/07/08/es6-arrow-function/" itemprop="url">
                   es6 箭头函数详解
                 </a>
@@ -887,7 +1048,7 @@ document.addEventListener(&quot;DOMContentLoaded&quot;, function(event) {
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">4</span>
+              <span class="site-state-item-count">5</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -897,7 +1058,7 @@ document.addEventListener(&quot;DOMContentLoaded&quot;, function(event) {
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
