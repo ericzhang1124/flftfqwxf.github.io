@@ -282,12 +282,10 @@
       
         
           
-            <p>###redux middleware是什么?</p>
-<p>简单的说,middleware就是给redux提供额外的外置功能,可以理解为插件,大至有以下特点:<br>1)它是全局的,middleware是添加到redux的实例上,而一般一个应用只有一个redux store,所以在一个sotre上添加了某个middleware,所有这个应用都会经过这个middleware<br>2)middleware,可以理解为插件,是可插拔的,定义了一个middleware,如果不使用,就与应用程序没有任何关系</p>
+            <h3 id="redux-middleware是什么"><a href="#redux-middleware是什么" class="headerlink" title="redux middleware是什么?"></a>redux middleware是什么?</h3><p>简单的说,middleware就是给redux提供额外的外置功能,可以理解为插件,大至有以下特点:<br>1)它是全局的,middleware是添加到redux的实例上,而一般一个应用只有一个redux store,所以在一个sotre上添加了某个middleware,所有这个应用都会经过这个middleware<br>2)middleware,可以理解为插件,是可插拔的,定义了一个middleware,如果不使用,就与应用程序没有任何关系</p>
 <h3 id="middleware-如何实现"><a href="#middleware-如何实现" class="headerlink" title="middleware 如何实现?"></a>middleware 如何实现?</h3><p>写一个 middleware,需要理解以下知识:</p>
 <p>1)有一定函数式编程理解<br>2)ES6箭头函数嵌套</p>
-<p> 定义中间件:</p>
-<pre><code>var thunkMiddleware = function ({dispatch, getState}) {
+<h4 id="定义中间件"><a href="#定义中间件" class="headerlink" title="定义中间件:"></a>定义中间件:</h4><pre><code>var thunkMiddleware = function ({dispatch, getState}) {
     // console.log(&apos;Enter thunkMiddleware&apos;);
     //此处的next 是 下一个插件,或 store.dispatch
     return function (next) {
@@ -307,16 +305,14 @@
         }
     }
 }
-</code></pre><p>初始化实例:</p>
-<pre><code>import {createStore, combineReducers, applyMiddleware} from &apos;redux&apos;
+</code></pre><h4 id="初始化实例"><a href="#初始化实例" class="headerlink" title="初始化实例:"></a>初始化实例:</h4><pre><code>import {createStore, combineReducers, applyMiddleware} from &apos;redux&apos;
 //applyMiddleware(thunkMiddleware,logger) 返回一个方法,并以createStore为参数,执行后返回一个store实例
 //其主要作用是把中间件参数值,放入到返回的函数中
 //这是函数式编程的写法,每次调用都返回一个新的函数,并把每次调用的参数都缓存到每个新返回的函数中
 //在这里相当于重写了 createStore方法,之后使用 finalCreateStore来代替createStore实例化store
 //之所以要重写 createStore,根据 applyMiddleware中源码得知,是为了重写dispatch
 const finalCreateStore = applyMiddleware(thunkMiddleware,logger)(createStore)
-</code></pre><p>调用 dispatch:</p>
-<pre><code>var asyncSayActionCreator_1 = function (message) {
+</code></pre><h4 id="调用-dispatch"><a href="#调用-dispatch" class="headerlink" title="调用 dispatch:"></a>调用 dispatch:</h4><pre><code>var asyncSayActionCreator_1 = function (message) {
     return function (dispatch) {
         setTimeout(function () {
             console.log(new Date(), &apos;Dispatch action now:&apos;)
@@ -329,8 +325,7 @@ const finalCreateStore = applyMiddleware(thunkMiddleware,logger)(createStore)
 }
 //在此处调用的 dispath,不是redux默认的dispatch,而是applyMiddleware 重构后的 dispatch
 store_0.dispatch(asyncSayActionCreator_1(&apos;Hi&apos;))
-</code></pre><p>中间件的固定格式:</p>
-<pre><code>/**
+</code></pre><h3 id="中间件的固定格式"><a href="#中间件的固定格式" class="headerlink" title="中间件的固定格式:"></a>中间件的固定格式:</h3><pre><code>/**
  * {dispatch,getState} 为createStore后的 store实例能数中的两个
  * next  是 下一个插件的 action,或 store.dispatch
  * action
