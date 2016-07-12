@@ -282,8 +282,18 @@
       
         
           
-            <p>统计一个字符串中,字符串内容为随机,以空格分格的词的数量,并以JSON的格式返回<br>var a=”this is a string and is a xx “;</p>
-<p>面试时第一次想到的答案:</p>
+            <p>面试题如下:</p>
+<p>统计一个字符串中,<strong>字符串内容为随机</strong>,<strong>以空格分格</strong>的词的数量,并以JSON的格式返回</p>
+<p>字符串示例:</p>
+<pre><code>//字符串是随机内容
+var a=&quot;this is a string and is a xx &quot;;
+</code></pre><p>返回格式为:</p>
+<pre><code>{
+    this:1
+    is:2
+    a:2
+}
+</code></pre><p>面试时第一次想到的答案:</p>
 <pre><code>var a=&quot;this is string test which is then&quot;;
 var b={};
 var c =a.split(&quot; &quot;);
