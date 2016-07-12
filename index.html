@@ -375,7 +375,7 @@ for (var pro in b) {
 <pre><code>var a=&quot;constructor constructor mytest __proto__ __lookupSetter__ __proto__ hasOwnProperty prototype&quot;;
 var b={};
 a.split(&quot; &quot;).filter(x=&gt;x).forEach(key=&gt;{
-  if(b[key] || typeof(b[key])!==&quot;number&quot;){
+  if(!b[key] || typeof(b[key])!==&quot;number&quot;){
     Object.defineProperty(b, key, {
             enumerable: true,
             configurable: true,

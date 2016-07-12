@@ -114,7 +114,7 @@ var a=&amp;quot;this is a string and is a xx &amp;quot;;
 }
 面试时第一次想到的答案:
 var a=&amp;quot;this is string test w">
-<meta property="og:updated_time" content="2016-07-12T08:47:43.000Z">
+<meta property="og:updated_time" content="2016-07-12T09:20:56.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="记一次面试中,遇到的一个问题:统计一个字符串中,以空格分格的词的数量,并以JSON的格式返回">
 <meta name="twitter:description" content="面试题如下:
@@ -405,7 +405,7 @@ for (var pro in b) {
 <pre><code>var a=&quot;constructor constructor mytest __proto__ __lookupSetter__ __proto__ hasOwnProperty prototype&quot;;
 var b={};
 a.split(&quot; &quot;).filter(x=&gt;x).forEach(key=&gt;{
-  if(b[key] || typeof(b[key])!==&quot;number&quot;){
+  if(!b[key] || typeof(b[key])!==&quot;number&quot;){
     Object.defineProperty(b, key, {
             enumerable: true,
             configurable: true,

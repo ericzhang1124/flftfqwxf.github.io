@@ -71,9 +71,8 @@
 //console.log(b);
 
 
-var a="constructor constructor mytest __proto__ __lookupSetter__ __proto__ hasOwnProperty prototype";
-   var a="this is string"
-var result={}
+//var a="constructor constructor mytest __proto__ __lookupSetter__ __proto__ hasOwnProperty prototype";
+//var b={}
 //var c =a.split(" ");
 //for(var t=0;t<c.length;t++){
 //    if(!b[c[t]] || typeof(b[c[t]])!=="number"){
@@ -87,25 +86,24 @@ var result={}
 //        b[c[t]]++;
 //    }
 //}
-   var b= a.split(' ').filter(x=>x).forEach((str)=>{
-               result[str]=1+(result[str]||0)}
-   );
-
-//在console时,在chrome 控制台中不会显示 __proto__,在jsbin的打印中会显示出来
-console.log(b);
-
-//但是在遍历的时候会遍历到__proto__
-for (var pro in b) {
-    console.log(pro);
-    console.log(b[pro])
-    console.log('------')
-}
+//
+//
+////在console时,在chrome 控制台中不会显示 __proto__,在jsbin的打印中会显示出来
+//console.log(b);
+//
+////但是在遍历的时候会遍历到__proto__
+//for (var pro in b) {
+//    console.log(pro);
+//    console.log(b[pro])
+//    console.log('------')
+//}
 
 
-   var a="constructor constructor mytest __proto__ __lookupSetter__ __proto__ hasOwnProperty prototype";
+   var a="constructor constructor mytest  __proto__ __lookupSetter__ __proto__ hasOwnProperty prototype";
    var b={};
    a.split(" ").filter(x=>x).forEach(key=>{
-       if(b[key] || typeof(b[key])!=="number"){
+       console.log(key);
+       if(!b[key] || typeof(b[key])!=="number"){
        Object.defineProperty(b, key, {
            enumerable: true,
            configurable: true,
@@ -118,7 +116,7 @@ for (var pro in b) {
 
 
    })
-   //在console时,在chrome 控制台中不会显示 __proto__,在jsbin的打印中会显示出来
+//   //在console时,在chrome 控制台中不会显示 __proto__,在jsbin的打印中会显示出来
    console.log(b);
 
    //但是在遍历的时候会遍历到__proto__
