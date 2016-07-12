@@ -68,7 +68,7 @@ tags: javascript
 
 这样看好象是对了,但是实际上,还有一个严重问题,如果字符串中存在 **__proto__**的内容,则无法设置 **__proto__**的值,因为**__proto__的值在默认在初始化后,是只读的**。
 
-于是就有了第三个方案:
+于是就有了第三次修改:
 
         var a="constructor constructor __proto__ __lookupSetter__ hasOwnProperty prototype";
         //通过JSON.parse初始化对象时,设置__proto__
@@ -89,6 +89,8 @@ tags: javascript
 这样解决了__proto__不能修改的问题,但是也不完美,因为如果字符串中没有__proto__,但返回的JSON中,还是会有这个属性
 
 后来又尝试了用数据转换,但还是不理想,最后还是用到了面试时,想到的思路,使用Object.defineProperty修改对象属性的特性,允许修改和枚举,为什么最开始没有使用这个方案,是最开始钻牛头尖了,想不使用新特性来做此事,事实证明,还是得用:
+
+###第一种解决方案:
 
     var a="constructor constructor mytest __proto__ __lookupSetter__ __proto__ hasOwnProperty prototype";
     var b={}
@@ -146,8 +148,7 @@ tags: javascript
 
 
 
-----------更简单的方式------------
-
+###第二种解决方案
 使用 Object.create(null)创建完全的空对象
 
 
@@ -174,19 +175,19 @@ tags: javascript
         console.log('------');
     }
 
-再次更新,使用 map的方式:
+###第三种解决方案,使用 map的方式:
 
 
-   b = (str) => str.split(/\s+/g).reduce((a, e) => a.set(e, a.has(e) ? a.get(e) + 1 : 1), new Map());
+       b = (str) => str.split(/\s+/g).reduce((a, e) => a.set(e, a.has(e) ? a.get(e) + 1 : 1), new Map());
 
-    //上面代码等同于:
-    b = (str) => str.split(/\s+/g).reduce((a, e) => a.set(e, a.has(e) ? a.get(e) + 1 : 1), new Map());
-   var r=b(a);
-   console.log(r);
+        //上面代码等同于:
+        b = (str) => str.split(/\s+/g).reduce((a, e) => a.set(e, a.has(e) ? a.get(e) + 1 : 1), new Map());
+       var r=b(a);
+       console.log(r);
 
-   r.forEach(function (val, key, array) {
-       console.log(key+':'+val)
-   })
+       r.forEach(function (val, key, array) {
+           console.log(key+':'+val)
+       })
 
 这种方法相对复杂,需要了解一些以下API:
 
@@ -194,16 +195,17 @@ Map的用法:
 
 现在很多时候会将Map来代替 var a={},来创建对象
 
-常用的API
+###常用的API:
 
- var m=new Map();
- m.get(key);
- m.set(key,val)
- map.has(key)
- map.delete(key)
- map.forEach() 与 Array.forEach用法相同
+     var m=new Map();
+     m.get(key);
+     m.set(key,val)
+     m.has(key)
+     m.delete(key)
+     m.forEach() 与 Array.forEach用法相同
+     m.size()
 
-数组 API reduce的用法
+###数组 API reduce的用法
 
 reduce :累加器
 
@@ -235,7 +237,7 @@ initialValue
 
 作为第一次调用 callback 的第一个参数。
 
-示例一:
+###示例一:
 
     var a=[1,2,3,4];
 
@@ -248,7 +250,8 @@ initialValue
 
 
 
-示例二:
+###示例二:
+与示例一不同,此处设置了 initialValue的值为 15,则在循环开始,则以此初始化为开始,以此类推
 
     var a=[1,2,3,4];
     a.reduce(function(previousValue,currentValue) {
@@ -257,9 +260,9 @@ initialValue
        return previousValue+currentValue;
     },15)
 
-与示例一不同,此处设置了 initialValue的值为 15,则在循环开始,则以此初始化为开始,以此类推
 
-示例三,初始值不仅可以是数字,也可以是任何你想传数的格式:
+####示例三
+初始值不仅可以是数字,也可以是任何你想传数的格式:
 
     var a=[1,2,3,4];
     a.reduce(function(previousValue,currentValue) {
@@ -289,3 +292,5 @@ http://jsbin.com/xewavet/11/edit?html,js,output
 http://jsbin.com/xocasu/7/edit?html,js,console,output
 
 http://jsbin.com/sohepe/4/edit?html,js,output
+
+http://jsbin.com/wewege/2/edit?html,js,output

@@ -423,7 +423,7 @@ for(var t=0;t&lt;c.length;t++){
 }
 console.log(b)
 </code></pre><p>这样看好象是对了,但是实际上,还有一个严重问题,如果字符串中存在 <strong><strong>proto</strong></strong>的内容,则无法设置 <strong><strong>proto</strong></strong>的值,因为<strong><strong>proto</strong>的值在默认在初始化后,是只读的</strong>。</p>
-<p>于是就有了第三个方案:</p>
+<p>于是就有了第三次修改:</p>
 <pre><code>var a=&quot;constructor constructor __proto__ __lookupSetter__ hasOwnProperty prototype&quot;;
 //通过JSON.parse初始化对象时,设置__proto__
 var b=JSON.parse(&quot;{\&quot;__proto__\&quot;:null}&quot;);
@@ -441,6 +441,7 @@ for(var t=0;t&lt;c.length;t++){
 console.log(b);
 </code></pre><p>这样解决了<strong>proto</strong>不能修改的问题,但是也不完美,因为如果字符串中没有<strong>proto</strong>,但返回的JSON中,还是会有这个属性</p>
 <p>后来又尝试了用数据转换,但还是不理想,最后还是用到了面试时,想到的思路,使用Object.defineProperty修改对象属性的特性,允许修改和枚举,为什么最开始没有使用这个方案,是最开始钻牛头尖了,想不使用新特性来做此事,事实证明,还是得用:</p>
+<p>###第一种解决方案:</p>
 <pre><code>var a=&quot;constructor constructor mytest __proto__ __lookupSetter__ __proto__ hasOwnProperty prototype&quot;;
 var b={}
 var c =a.split(&quot; &quot;);
@@ -490,8 +491,7 @@ for (var pro in b) {
     console.log(b[pro]);
     console.log(&apos;------&apos;);
 }
-</code></pre><p>———-更简单的方式————</p>
-<p>使用 Object.create(null)创建完全的空对象</p>
+</code></pre><p>###第二种解决方案<br>使用 Object.create(null)创建完全的空对象</p>
 <pre><code>var a=&quot;constructor constructor mytest __proto__ __lookupSetter__ __proto__ hasOwnProperty prototype&quot;;
 //创建没有原型的对象
 //通过这种方式,最简单,但在c
@@ -514,18 +514,29 @@ for (var pro in b) {
     console.log(b[pro]);
     console.log(&apos;------&apos;);
 }
-</code></pre><p>再次更新,使用 map的方式:</p>
-<p>   b = (str) =&gt; str.split(/\s+/g).reduce((a, e) =&gt; a.set(e, a.has(e) ? a.get(e) + 1 : 1), new Map());</p>
-<pre><code>//上面代码等同于:
-b = (str) =&gt; str.split(/\s+/g).reduce((a, e) =&gt; a.set(e, a.has(e) ? a.get(e) + 1 : 1), new Map());
-</code></pre><p>   var r=b(a);<br>   console.log(r);</p>
-<p>   r.forEach(function (val, key, array) {<br>       console.log(key+’:’+val)<br>   })</p>
-<p>这种方法相对复杂,需要了解一些以下API:</p>
+</code></pre><p>###第三种解决方案,使用 map的方式:</p>
+<pre><code>b = (str) =&gt; str.split(/\s+/g).reduce((a, e) =&gt; a.set(e, a.has(e) ? a.get(e) + 1 : 1), new Map());
+
+ //上面代码等同于:
+ b = (str) =&gt; str.split(/\s+/g).reduce((a, e) =&gt; a.set(e, a.has(e) ? a.get(e) + 1 : 1), new Map());
+var r=b(a);
+console.log(r);
+
+r.forEach(function (val, key, array) {
+    console.log(key+&apos;:&apos;+val)
+})
+</code></pre><p>这种方法相对复杂,需要了解一些以下API:</p>
 <p>Map的用法:</p>
 <p>现在很多时候会将Map来代替 var a={},来创建对象</p>
-<p>常用的API</p>
-<p> var m=new Map();<br> m.get(key);<br> m.set(key,val)<br> map.has(key)<br> map.delete(key)<br> map.forEach() 与 Array.forEach用法相同</p>
-<p>数组 API reduce的用法</p>
+<p>###常用的API:</p>
+<pre><code>var m=new Map();
+m.get(key);
+m.set(key,val)
+m.has(key)
+m.delete(key)
+m.forEach() 与 Array.forEach用法相同
+m.size()
+</code></pre><p>###数组 API reduce的用法</p>
 <p>reduce :累加器</p>
 <pre><code>arr.reduce(callback,[initialValue])
 </code></pre><p>参数</p>
@@ -543,7 +554,7 @@ b = (str) =&gt; str.split(/\s+/g).reduce((a, e) =&gt; a.set(e, a.has(e) ? a.get(
 </blockquote>
 <p>initialValue</p>
 <p>作为第一次调用 callback 的第一个参数。</p>
-<p>示例一:</p>
+<p>###示例一:</p>
 <pre><code>var a=[1,2,3,4];
 
 
@@ -552,15 +563,14 @@ a.reduce(function(previousValue,currentValue) {
     //第二次循环中, previousValue为 上一次循环中return 的值,currentValue则3,以此类推
   return previousValue+currentValue;
 })
-</code></pre><p>示例二:</p>
+</code></pre><p>###示例二:<br>与示例一不同,此处设置了 initialValue的值为 15,则在循环开始,则以此初始化为开始,以此类推</p>
 <pre><code>var a=[1,2,3,4];
 a.reduce(function(previousValue,currentValue) {
     //此示例中,第一个previousValue 为15,currentValue为1
    //第二次循环中, previousValue为 上一次循环中return 的值,currentValue则3,以此类推
    return previousValue+currentValue;
 },15)
-</code></pre><p>与示例一不同,此处设置了 initialValue的值为 15,则在循环开始,则以此初始化为开始,以此类推</p>
-<p>示例三,初始值不仅可以是数字,也可以是任何你想传数的格式:</p>
+</code></pre><p>####示例三<br>初始值不仅可以是数字,也可以是任何你想传数的格式:</p>
 <pre><code>var a=[1,2,3,4];
 a.reduce(function(previousValue,currentValue) {
     //previousValue为数组,并且将后续的值都添加到这个数组中
@@ -581,6 +591,7 @@ var b=Object.create(null);
 <p><a href="http://jsbin.com/xewavet/11/edit?html,js,output" target="_blank" rel="external">http://jsbin.com/xewavet/11/edit?html,js,output</a></p>
 <p><a href="http://jsbin.com/xocasu/7/edit?html,js,console,output" target="_blank" rel="external">http://jsbin.com/xocasu/7/edit?html,js,console,output</a></p>
 <p><a href="http://jsbin.com/sohepe/4/edit?html,js,output" target="_blank" rel="external">http://jsbin.com/sohepe/4/edit?html,js,output</a></p>
+<p><a href="http://jsbin.com/wewege/2/edit?html,js,output" target="_blank" rel="external">http://jsbin.com/wewege/2/edit?html,js,output</a></p>
 
           
         
