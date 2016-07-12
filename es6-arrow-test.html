@@ -6,34 +6,35 @@
 </head>
 <body>
 <script>
-    var a="this is string constructor constructor __lookupSetter__ __proto__ hasOwnProperty prototype test which is then";
-    var b={};
-    var c =a.split(" ");
-    for(var t=0;t<c.length;t++){
-//        console.log(b[c[t]]);
-        if(!b[c[t]] || typeof(b[c[t]])!=="number"){
-            b[c[t]]=1;
-        }else{
-            b[c[t]]++;
-        }
-    }
-    console.log(b)
+   <!---->
+//    var a="this is string constructor constructor __lookupSetter__ __proto__ hasOwnProperty prototype test which is then";
+//    var b={};
+//    var c =a.split(" ");
+//    for(var t=0;t<c.length;t++){
+////        console.log(b[c[t]]);
+//        if(!b[c[t]] || typeof(b[c[t]])!=="number"){
+//            b[c[t]]=1;
+//        }else{
+//            b[c[t]]++;
+//        }
+//    }
+//    console.log(b)
 
-
-    var a="constructor constructor __lookupSetter__ hasOwnProperty prototype";
-    var b=JSON.parse("{\"__proto__\":null}");
-    var c =a.split(" ");
-    for(var t=0;t<c.length;t++){
-       // console.log(c[t]);
-       // console.log(typeof(b[c[t]]));
-
-        if(!b[c[t]] || typeof(b[c[t]])!=="number"){
-            b[c[t]]=1;
-        }else{
-            b[c[t]]++;
-        }
-    }
-    console.log(b);
+//
+//    var a="constructor constructor __lookupSetter__ hasOwnProperty prototype";
+//    var b=JSON.parse("{\"__proto__\":null}");
+//    var c =a.split(" ");
+//    for(var t=0;t<c.length;t++){
+//       // console.log(c[t]);
+//       // console.log(typeof(b[c[t]]));
+//
+//        if(!b[c[t]] || typeof(b[c[t]])!=="number"){
+//            b[c[t]]=1;
+//        }else{
+//            b[c[t]]++;
+//        }
+//    }
+//    console.log(b);
 
 //var a="constructor constructor __lookupSetter__ hasOwnProperty prototype";
 //var b=JSON.parse("{\"__proto__\":null}");
@@ -52,39 +53,44 @@
 
 
 
-
-var a="constructor constructor __lookupSetter__ __proto__ hasOwnProperty prototype";
-var b=[];
-var c =a.split(" ");
-for(var t=0;t<c.length;t++){
-    // console.log(c[t]);
-    // console.log(typeof(b[c[t]]));
-
-    if(!b[c[t]] || typeof(b[c[t]])!=="number"){
-        b[c[t]]=1;
-    }else{
-        b[c[t]]++;
-    }
-}
-
-console.log(b);
+//
+//var a="constructor constructor __lookupSetter__ __proto__ hasOwnProperty prototype";
+//var b=[];
+//var c =a.split(" ");
+//for(var t=0;t<c.length;t++){
+//    // console.log(c[t]);
+//    // console.log(typeof(b[c[t]]));
+//
+//    if(!b[c[t]] || typeof(b[c[t]])!=="number"){
+//        b[c[t]]=1;
+//    }else{
+//        b[c[t]]++;
+//    }
+//}
+//
+//console.log(b);
 
 
 var a="constructor constructor mytest __proto__ __lookupSetter__ __proto__ hasOwnProperty prototype";
-var b={}
-var c =a.split(" ");
-for(var t=0;t<c.length;t++){
-    if(!b[c[t]] || typeof(b[c[t]])!=="number"){
-        Object.defineProperty(b, c[t], {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: 1
-        });
-    }else{
-        b[c[t]]++;
-    }
-}
+   var a="this is string"
+var result={}
+//var c =a.split(" ");
+//for(var t=0;t<c.length;t++){
+//    if(!b[c[t]] || typeof(b[c[t]])!=="number"){
+//        Object.defineProperty(b, c[t], {
+//            enumerable: true,
+//            configurable: true,
+//            writable: true,
+//            value: 1
+//        });
+//    }else{
+//        b[c[t]]++;
+//    }
+//}
+   var b= a.split(' ').filter(x=>x).forEach((str)=>{
+               result[str]=1+(result[str]||0)}
+   );
+
 //在console时,在chrome 控制台中不会显示 __proto__,在jsbin的打印中会显示出来
 console.log(b);
 
@@ -95,6 +101,32 @@ for (var pro in b) {
     console.log('------')
 }
 
+
+   var a="constructor constructor mytest __proto__ __lookupSetter__ __proto__ hasOwnProperty prototype";
+   var b={};
+   a.split(" ").filter(x=>x).forEach(key=>{
+       if(b[key] || typeof(b[key])!=="number"){
+       Object.defineProperty(b, key, {
+           enumerable: true,
+           configurable: true,
+           writable: true,
+           value: 1
+       });
+   }else{
+       b[key]++
+   }
+
+
+   })
+   //在console时,在chrome 控制台中不会显示 __proto__,在jsbin的打印中会显示出来
+   console.log(b);
+
+   //但是在遍历的时候会遍历到__proto__
+   for (var pro in b) {
+       console.log(pro);
+       console.log(b[pro]);
+       console.log('------');
+   }
 </script>
 </body>
 </html>

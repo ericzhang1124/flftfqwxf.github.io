@@ -114,7 +114,7 @@ var a=&amp;quot;this is a string and is a xx &amp;quot;;
 }
 面试时第一次想到的答案:
 var a=&amp;quot;this is string test w">
-<meta property="og:updated_time" content="2016-07-12T08:13:43.000Z">
+<meta property="og:updated_time" content="2016-07-12T08:46:01.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="记一次面试中,遇到的一个问题:统计一个字符串中,以空格分格的词的数量,并以JSON的格式返回">
 <meta name="twitter:description" content="面试题如下:
@@ -284,7 +284,7 @@ var a=&amp;quot;this is string test w">
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-12T14:12:26+08:00" content="2016-07-12">
+            <time itemprop="dateCreated" datetime="2016-07-12T16:12:26+08:00" content="2016-07-12">
               2016-07-12
             </time>
           </span>
@@ -401,6 +401,31 @@ for (var pro in b) {
     console.log(pro);
     console.log(b[pro])
     console.log(&apos;------&apos;)
+</code></pre><p>最后,再用ES6简化一下代码:</p>
+<pre><code>var a=&quot;constructor constructor mytest __proto__ __lookupSetter__ __proto__ hasOwnProperty prototype&quot;;
+var b={};
+a.split(&quot; &quot;).filter(x=&gt;x).forEach(key=&gt;{
+  if(b[key] || typeof(b[key])!==&quot;number&quot;){
+    Object.defineProperty(b, key, {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: 1
+        });
+  }else{
+    b[key]++
+  }
+
+
+})
+//在console时,在chrome 控制台中不会显示 __proto__,在jsbin的打印中会显示出来
+console.log(b);
+
+//但是在遍历的时候会遍历到__proto__
+for (var pro in b) {
+    console.log(pro);
+    console.log(b[pro]);
+    console.log(&apos;------&apos;);
 }
 </code></pre><p><strong>总结:这个题,重点不在统计上,而是在使用JSON来返回数据上,并且要考虑到对象的属性,有些是不可修改和枚举的,故如果遇到与内置属性同名的字段,就需要允许其修改,关键点就在 Object.defineProperty的应用:</strong></p>
 <pre><code>Object.defineProperty(b, c[t], {
@@ -411,6 +436,7 @@ for (var pro in b) {
             });
 </code></pre><p>最终示例:</p>
 <p><a href="http://jsbin.com/xewavet/11/edit?html,js,output" target="_blank" rel="external">http://jsbin.com/xewavet/11/edit?html,js,output</a></p>
+<p><a href="http://jsbin.com/xocasu/6/edit?html,js,console,output" target="_blank" rel="external">http://jsbin.com/xocasu/6/edit?html,js,console,output</a></p>
 
       
     </div>
