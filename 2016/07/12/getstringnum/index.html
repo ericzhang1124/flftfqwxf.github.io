@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="javascript," />
 
 
 
@@ -84,24 +84,31 @@
 
 
 
-<meta name="description" content="有时使用intellij idea 自带的浏览服务时,会弹出:
-Page &amp;apos;xxxxxx&amp;apos; requested without authorization, you can copy URL and open it in browser to trust it.
-解决办法为设置: 设置中,搜索找到 [Debugger&amp;gt;allow unsigned requrest]并勾选">
+<meta name="description" content="统计一个字符串中,字符串内容为随机,以空格分格的词的数量,并以JSON的格式返回var a=”this is a string and is a xx “;
+面试时第一次想到的答案:
+var a=&amp;quot;this is string test which is then&amp;quot;;
+var b={};
+var c =a.split(&amp;quot; &amp;quot;);
+for(var t=0;t&amp;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="intellij IDEA 错误:requested without authorization, you can copy URL and open it in browser to trust it.解决办法">
-<meta property="og:url" content="http://yoursite.com/2016/07/05/intellijerror/index.html">
+<meta property="og:title" content="记一次面试中,遇到的一个问题:统计一个字符串中,以空格分格的词的数量,并以JSON的格式返回">
+<meta property="og:url" content="http://yoursite.com/2016/07/12/getstringnum/index.html">
 <meta property="og:site_name" content="猫宅的@橱窗">
-<meta property="og:description" content="有时使用intellij idea 自带的浏览服务时,会弹出:
-Page &amp;apos;xxxxxx&amp;apos; requested without authorization, you can copy URL and open it in browser to trust it.
-解决办法为设置: 设置中,搜索找到 [Debugger&amp;gt;allow unsigned requrest]并勾选">
-<meta property="og:image" content="http://yoursite.com/2016/07/05/intellijerror/1.png">
-<meta property="og:updated_time" content="2016-07-05T07:34:37.000Z">
+<meta property="og:description" content="统计一个字符串中,字符串内容为随机,以空格分格的词的数量,并以JSON的格式返回var a=”this is a string and is a xx “;
+面试时第一次想到的答案:
+var a=&amp;quot;this is string test which is then&amp;quot;;
+var b={};
+var c =a.split(&amp;quot; &amp;quot;);
+for(var t=0;t&amp;">
+<meta property="og:updated_time" content="2016-07-12T08:10:47.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="intellij IDEA 错误:requested without authorization, you can copy URL and open it in browser to trust it.解决办法">
-<meta name="twitter:description" content="有时使用intellij idea 自带的浏览服务时,会弹出:
-Page &amp;apos;xxxxxx&amp;apos; requested without authorization, you can copy URL and open it in browser to trust it.
-解决办法为设置: 设置中,搜索找到 [Debugger&amp;gt;allow unsigned requrest]并勾选">
-<meta name="twitter:image" content="http://yoursite.com/2016/07/05/intellijerror/1.png">
+<meta name="twitter:title" content="记一次面试中,遇到的一个问题:统计一个字符串中,以空格分格的词的数量,并以JSON的格式返回">
+<meta name="twitter:description" content="统计一个字符串中,字符串内容为随机,以空格分格的词的数量,并以JSON的格式返回var a=”this is a string and is a xx “;
+面试时第一次想到的答案:
+var a=&amp;quot;this is string test which is then&amp;quot;;
+var b={};
+var c =a.split(&amp;quot; &amp;quot;);
+for(var t=0;t&amp;">
 
 
 
@@ -122,9 +129,9 @@ Page &amp;apos;xxxxxx&amp;apos; requested without authorization, you can copy UR
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/07/05/intellijerror/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/07/12/getstringnum/"/>
 
-  <title> intellij IDEA 错误:requested without authorization, you can copy URL and open it in browser to trust it.解决办法 | 猫宅的@橱窗 </title>
+  <title> 记一次面试中,遇到的一个问题:统计一个字符串中,以空格分格的词的数量,并以JSON的格式返回 | 猫宅的@橱窗 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -244,7 +251,7 @@ Page &amp;apos;xxxxxx&amp;apos; requested without authorization, you can copy UR
             
             
               
-                intellij IDEA 错误:requested without authorization, you can copy URL and open it in browser to trust it.解决办法
+                记一次面试中,遇到的一个问题:统计一个字符串中,以空格分格的词的数量,并以JSON的格式返回
               
             
           </h1>
@@ -256,8 +263,8 @@ Page &amp;apos;xxxxxx&amp;apos; requested without authorization, you can copy UR
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-05T15:12:55+08:00" content="2016-07-05">
-              2016-07-05
+            <time itemprop="dateCreated" datetime="2016-07-12T14:12:26+08:00" content="2016-07-12">
+              2016-07-12
             </time>
           </span>
 
@@ -284,10 +291,95 @@ Page &amp;apos;xxxxxx&amp;apos; requested without authorization, you can copy UR
       
 
       
-        <p>有时使用intellij idea 自带的浏览服务时,会弹出:</p>
-<pre><code>Page &apos;xxxxxx&apos; requested without authorization, you can copy URL and open it in browser to trust it.
-</code></pre><p>解决办法为设置:<br> 设置中,搜索找到 [Debugger&gt;allow unsigned requrest]并勾选上,就可以了</p>
-<img src="/2016/07/05/intellijerror/1.png" alt="1.png" title="">
+        <p>统计一个字符串中,字符串内容为随机,以空格分格的词的数量,并以JSON的格式返回<br>var a=”this is a string and is a xx “;</p>
+<p>面试时第一次想到的答案:</p>
+<pre><code>var a=&quot;this is string test which is then&quot;;
+var b={};
+var c =a.split(&quot; &quot;);
+for(var t=0;t&lt;c.length;t++){
+    if(!b[c[t]]){
+        b[c[t]]=1;
+    }else{
+        b[c[t]]++;
+    }
+}
+console.log(b)
+</code></pre><p>初看没有什么问题,却忽略了,字符串中可能会存在,创建对象时,对象已有的属性名,如</p>
+<pre><code>var a=&quot;this is string test which is then prototype constructor&quot;;
+        var b={};
+        var c =a.split(&quot; &quot;);
+        for(var t=0;t&lt;c.length;t++){
+            if(!b[c[t]]){
+                b[c[t]]=1;
+            }else{
+                b[c[t]]++;
+            }
+        }
+        console.log(b)
+</code></pre><p>这种情况下,返回的json就会有问题。</p>
+<p>当时还没想明白,后来做了第二次修改,添加了一个类型判断:</p>
+<pre><code>var b={};
+var c =a.split(&quot; &quot;);
+for(var t=0;t&lt;c.length;t++){
+    if(!b[c[t]] || typeof(b[c[t]])!==&quot;number&quot;){
+        b[c[t]]=1;
+    }else{
+        b[c[t]]++;
+    }
+}
+console.log(b)
+</code></pre><p>这样看好象是对了,但是实际上,还有一个严重问题,如果字符串中存在 <strong>proto</strong>的内容,则无法设置 <strong>proto</strong>的值,因为<strong>proto</strong>的值在默认在初始化后,是只读的。</p>
+<p>于是就有了第三个方案:</p>
+<pre><code>var a=&quot;constructor constructor __proto__ __lookupSetter__ hasOwnProperty prototype&quot;;
+//通过JSON.parse初始化对象时,设置__proto__
+var b=JSON.parse(&quot;{\&quot;__proto__\&quot;:null}&quot;);
+var c =a.split(&quot; &quot;);
+for(var t=0;t&lt;c.length;t++){
+   // console.log(c[t]);
+   // console.log(typeof(b[c[t]]));
+
+    if(!b[c[t]] || typeof(b[c[t]])!==&quot;number&quot;){
+        b[c[t]]=1;
+    }else{
+        b[c[t]]++;
+    }
+}
+console.log(b);
+</code></pre><p>这样解决了<strong>proto</strong>不能修改的问题,但是也不完美,因为如果字符串中没有<strong>proto</strong>,但返回的JSON中,还是会有这个属性</p>
+<p>后来又尝试了用数据转换,但还是不理想,最后还是用到了面试时,想到的思路,使用Object.defineProperty修改对象属性的特性,允许修改和枚举,为什么最开始没有使用这个方案,是最开始钻牛头尖了,想不使用新特性来做此事,事实证明,还是得用:</p>
+<pre><code>var a=&quot;constructor constructor mytest __proto__ __lookupSetter__ __proto__ hasOwnProperty prototype&quot;;
+var b={}
+var c =a.split(&quot; &quot;);
+for(var t=0;t&lt;c.length;t++){
+    if(!b[c[t]] || typeof(b[c[t]])!==&quot;number&quot;){
+        Object.defineProperty(b, c[t], {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: 1
+        });
+    }else{
+        b[c[t]]++;
+    }
+}
+//在console时,在chrome 控制台中不会显示 __proto__,在jsbin的打印中会显示出来
+console.log(b);
+
+//但是在遍历的时候会遍历到__proto__
+for (var pro in b) {
+    console.log(pro);
+    console.log(b[pro])
+    console.log(&apos;------&apos;)
+}
+</code></pre><p><strong>总结:这个题,重点不在统计上,而是在使用JSON来返回数据上,并且要考虑到对象的属性,有些是不可修改和枚举的,故如果遇到与内置属性同名的字段,就需要允许其修改,关键点就在 Object.defineProperty的应用:</strong></p>
+<pre><code>Object.defineProperty(b, c[t], {
+                enumerable: true,
+                configurable: true,
+                writable: true,
+                value: 1
+            });
+</code></pre><p>最终示例:</p>
+<p><a href="http://jsbin.com/xewavet/11/edit?html,js,output" target="_blank" rel="external">http://jsbin.com/xewavet/11/edit?html,js,output</a></p>
 
       
     </div>
@@ -307,22 +399,24 @@ Page &amp;apos;xxxxxx&amp;apos; requested without authorization, you can copy UR
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/javascript/" rel="tag">#javascript</a>
+          
+        </div>
+      
 
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/06/28/defineProperty/" rel="next" title="Object.defineProperty用法">
-                <i class="fa fa-chevron-left"></i> Object.defineProperty用法
+              <a href="/2016/07/09/redux-middleware/" rel="next" title="redux middleware 中间件">
+                <i class="fa fa-chevron-left"></i> redux middleware 中间件
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/07/08/es6-arrow-function/" rel="prev" title="es6 箭头函数详解">
-                es6 箭头函数详解 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>

@@ -362,14 +362,16 @@ for (var pro in b) {
     console.log(b[pro])
     console.log(&apos;------&apos;)
 }
-</code></pre><p>总结:这个题,重点不在统计上,而是在使用JSON来返回数据上,并且要考虑到对象的属性,有些是不可修改和枚举的,故如果遇到与内置属性同名的字段,就需要允许其修改,关键点就在 Object.defineProperty的应用:</p>
+</code></pre><p><strong>总结:这个题,重点不在统计上,而是在使用JSON来返回数据上,并且要考虑到对象的属性,有些是不可修改和枚举的,故如果遇到与内置属性同名的字段,就需要允许其修改,关键点就在 Object.defineProperty的应用:</strong></p>
 <pre><code>Object.defineProperty(b, c[t], {
                 enumerable: true,
                 configurable: true,
                 writable: true,
                 value: 1
             });
-</code></pre>
+</code></pre><p>最终示例:</p>
+<p><a href="http://jsbin.com/xewavet/11/edit?html,js,output" target="_blank" rel="external">http://jsbin.com/xewavet/11/edit?html,js,output</a></p>
+
           
         
       
@@ -1232,7 +1234,7 @@ document.addEventListener(&quot;DOMContentLoaded&quot;, function(event) {
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

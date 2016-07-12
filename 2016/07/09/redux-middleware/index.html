@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="redux," />
 
 
 
@@ -84,24 +84,16 @@
 
 
 
-<meta name="description" content="有时使用intellij idea 自带的浏览服务时,会弹出:
-Page &amp;apos;xxxxxx&amp;apos; requested without authorization, you can copy URL and open it in browser to trust it.
-解决办法为设置: 设置中,搜索找到 [Debugger&amp;gt;allow unsigned requrest]并勾选">
+<meta name="description" content="redux middleware是什么?简单的说,middleware就是给redux提供额外的外置功能,可以理解为插件,大至有以下特点:1)它是全局的,middleware是添加到redux的实例上,而一般一个应用只有一个redux store,所以在一个sotre上添加了某个middleware,所有这个应用都会经过这个middleware2)middleware,可以理解为插件,是可插拔的,">
 <meta property="og:type" content="article">
-<meta property="og:title" content="intellij IDEA 错误:requested without authorization, you can copy URL and open it in browser to trust it.解决办法">
-<meta property="og:url" content="http://yoursite.com/2016/07/05/intellijerror/index.html">
+<meta property="og:title" content="redux middleware 中间件">
+<meta property="og:url" content="http://yoursite.com/2016/07/09/redux-middleware/index.html">
 <meta property="og:site_name" content="猫宅的@橱窗">
-<meta property="og:description" content="有时使用intellij idea 自带的浏览服务时,会弹出:
-Page &amp;apos;xxxxxx&amp;apos; requested without authorization, you can copy URL and open it in browser to trust it.
-解决办法为设置: 设置中,搜索找到 [Debugger&amp;gt;allow unsigned requrest]并勾选">
-<meta property="og:image" content="http://yoursite.com/2016/07/05/intellijerror/1.png">
-<meta property="og:updated_time" content="2016-07-05T07:34:37.000Z">
+<meta property="og:description" content="redux middleware是什么?简单的说,middleware就是给redux提供额外的外置功能,可以理解为插件,大至有以下特点:1)它是全局的,middleware是添加到redux的实例上,而一般一个应用只有一个redux store,所以在一个sotre上添加了某个middleware,所有这个应用都会经过这个middleware2)middleware,可以理解为插件,是可插拔的,">
+<meta property="og:updated_time" content="2016-07-09T03:40:12.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="intellij IDEA 错误:requested without authorization, you can copy URL and open it in browser to trust it.解决办法">
-<meta name="twitter:description" content="有时使用intellij idea 自带的浏览服务时,会弹出:
-Page &amp;apos;xxxxxx&amp;apos; requested without authorization, you can copy URL and open it in browser to trust it.
-解决办法为设置: 设置中,搜索找到 [Debugger&amp;gt;allow unsigned requrest]并勾选">
-<meta name="twitter:image" content="http://yoursite.com/2016/07/05/intellijerror/1.png">
+<meta name="twitter:title" content="redux middleware 中间件">
+<meta name="twitter:description" content="redux middleware是什么?简单的说,middleware就是给redux提供额外的外置功能,可以理解为插件,大至有以下特点:1)它是全局的,middleware是添加到redux的实例上,而一般一个应用只有一个redux store,所以在一个sotre上添加了某个middleware,所有这个应用都会经过这个middleware2)middleware,可以理解为插件,是可插拔的,">
 
 
 
@@ -122,9 +114,9 @@ Page &amp;apos;xxxxxx&amp;apos; requested without authorization, you can copy UR
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/07/05/intellijerror/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/07/09/redux-middleware/"/>
 
-  <title> intellij IDEA 错误:requested without authorization, you can copy URL and open it in browser to trust it.解决办法 | 猫宅的@橱窗 </title>
+  <title> redux middleware 中间件 | 猫宅的@橱窗 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -244,7 +236,7 @@ Page &amp;apos;xxxxxx&amp;apos; requested without authorization, you can copy UR
             
             
               
-                intellij IDEA 错误:requested without authorization, you can copy URL and open it in browser to trust it.解决办法
+                redux middleware 中间件
               
             
           </h1>
@@ -256,8 +248,8 @@ Page &amp;apos;xxxxxx&amp;apos; requested without authorization, you can copy UR
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-05T15:12:55+08:00" content="2016-07-05">
-              2016-07-05
+            <time itemprop="dateCreated" datetime="2016-07-09T10:49:05+08:00" content="2016-07-09">
+              2016-07-09
             </time>
           </span>
 
@@ -284,11 +276,69 @@ Page &amp;apos;xxxxxx&amp;apos; requested without authorization, you can copy UR
       
 
       
-        <p>有时使用intellij idea 自带的浏览服务时,会弹出:</p>
-<pre><code>Page &apos;xxxxxx&apos; requested without authorization, you can copy URL and open it in browser to trust it.
-</code></pre><p>解决办法为设置:<br> 设置中,搜索找到 [Debugger&gt;allow unsigned requrest]并勾选上,就可以了</p>
-<img src="/2016/07/05/intellijerror/1.png" alt="1.png" title="">
+        <h3 id="redux-middleware是什么"><a href="#redux-middleware是什么" class="headerlink" title="redux middleware是什么?"></a>redux middleware是什么?</h3><p>简单的说,middleware就是给redux提供额外的外置功能,可以理解为插件,大至有以下特点:<br>1)它是全局的,middleware是添加到redux的实例上,而一般一个应用只有一个redux store,所以在一个sotre上添加了某个middleware,所有这个应用都会经过这个middleware<br>2)middleware,可以理解为插件,是可插拔的,定义了一个middleware,如果不使用,就与应用程序没有任何关系</p>
+<h3 id="middleware-如何实现"><a href="#middleware-如何实现" class="headerlink" title="middleware 如何实现?"></a>middleware 如何实现?</h3><p>写一个 middleware,需要理解以下知识:</p>
+<p>1)有一定函数式编程理解<br>2)ES6箭头函数嵌套</p>
+<h4 id="定义中间件"><a href="#定义中间件" class="headerlink" title="定义中间件:"></a>定义中间件:</h4><pre><code>var thunkMiddleware = function ({dispatch, getState}) {
+    // console.log(&apos;Enter thunkMiddleware&apos;);
+    //此处的next 是 下一个插件,或 store.dispatch
+    return function (next) {
+        // console.log(&apos;Function &quot;next&quot; provided:&apos;, next);
+        // action 为 调用 store.dispatch时的 action
+        //store.dispatch调用时,将会使用这个方法
+        return function (action) {
+            console.log(&apos;this is dispatch&apos;)
+          //  console.log(&apos;Handling action:&apos;, action);
+            //如果是function则表示为 actioncreator 异步
+            if (typeof action === &apos;function&apos;) {
+                return action(dispatch, getState)
+            } else {
+                //如果action是一个action对象则调用到 reducer
+                next(action)
+            }
+        }
+    }
+}
+</code></pre><h4 id="初始化实例"><a href="#初始化实例" class="headerlink" title="初始化实例:"></a>初始化实例:</h4><pre><code>import {createStore, combineReducers, applyMiddleware} from &apos;redux&apos;
+//applyMiddleware(thunkMiddleware,logger) 返回一个方法,并以createStore为参数,执行后返回一个store实例
+//其主要作用是把中间件参数值,放入到返回的函数中
+//这是函数式编程的写法,每次调用都返回一个新的函数,并把每次调用的参数都缓存到每个新返回的函数中
+//在这里相当于重写了 createStore方法,之后使用 finalCreateStore来代替createStore实例化store
+//之所以要重写 createStore,根据 applyMiddleware中源码得知,是为了重写dispatch
+const finalCreateStore = applyMiddleware(thunkMiddleware,logger)(createStore)
+</code></pre><h4 id="调用-dispatch"><a href="#调用-dispatch" class="headerlink" title="调用 dispatch:"></a>调用 dispatch:</h4><pre><code>var asyncSayActionCreator_1 = function (message) {
+    return function (dispatch) {
+        setTimeout(function () {
+            console.log(new Date(), &apos;Dispatch action now:&apos;)
+            dispatch({
+                type: &apos;SAY&apos;,
+                message
+            })
+        }, 2000)
+    }
+}
+//在此处调用的 dispath,不是redux默认的dispatch,而是applyMiddleware 重构后的 dispatch
+store_0.dispatch(asyncSayActionCreator_1(&apos;Hi&apos;))
+</code></pre><h3 id="中间件的固定格式"><a href="#中间件的固定格式" class="headerlink" title="中间件的固定格式:"></a>中间件的固定格式:</h3><pre><code>/**
+ * {dispatch,getState} 为createStore后的 store实例能数中的两个
+ * next  是 下一个插件的 action,或 store.dispatch
+ * action
+ * 每个插件都必须执行 next(action) 以继续后续的操作
+ */
+const logger=({dispatch,getState})=&gt;next=&gt;action=&gt;{
+    console.log(&apos;loger:&apos;,action.type);
+    let result=next(action);
+   console.log(&apos;loger&apos;,getState());
 
+}
+//此代码与上面等同
+const logger=store=&gt;next=&gt;action=&gt;{
+        console.log(&apos;loger:&apos;,action.type);
+        let result=next(action);
+       console.log(&apos;loger&apos;,store.getState());
+
+    }
+</code></pre>
       
     </div>
 
@@ -307,21 +357,27 @@ Page &amp;apos;xxxxxx&amp;apos; requested without authorization, you can copy UR
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/redux/" rel="tag">#redux</a>
+          
+        </div>
+      
 
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/06/28/defineProperty/" rel="next" title="Object.defineProperty用法">
-                <i class="fa fa-chevron-left"></i> Object.defineProperty用法
+              <a href="/2016/07/08/es6-arrow-function/" rel="next" title="es6 箭头函数详解">
+                <i class="fa fa-chevron-left"></i> es6 箭头函数详解
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/07/08/es6-arrow-function/" rel="prev" title="es6 箭头函数详解">
-                es6 箭头函数详解 <i class="fa fa-chevron-right"></i>
+              <a href="/2016/07/12/getstringnum/" rel="prev" title="记一次面试中,遇到的一个问题:统计一个字符串中,以空格分格的词的数量,并以JSON的格式返回">
+                记一次面试中,遇到的一个问题:统计一个字符串中,以空格分格的词的数量,并以JSON的格式返回 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -429,7 +485,7 @@ Page &amp;apos;xxxxxx&amp;apos; requested without authorization, you can copy UR
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#redux-middleware是什么"><span class="nav-number">1.</span> <span class="nav-text">redux middleware是什么?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#middleware-如何实现"><span class="nav-number">2.</span> <span class="nav-text">middleware 如何实现?</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#定义中间件"><span class="nav-number">2.1.</span> <span class="nav-text">定义中间件:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#初始化实例"><span class="nav-number">2.2.</span> <span class="nav-text">初始化实例:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#调用-dispatch"><span class="nav-number">2.3.</span> <span class="nav-text">调用 dispatch:</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#中间件的固定格式"><span class="nav-number">3.</span> <span class="nav-text">中间件的固定格式:</span></a></li></ol></div>
             
           </div>
         </section>
