@@ -6,11 +6,29 @@
 </head>
 <body>
 <script>
-    function a() {
-        var f = () => {'use strict'; return this};
-        console.log(f() === window); // 或全局对象
+
+
+    var a="constructor constructor mytest __proto__ __lookupSetter__ __proto__ hasOwnProperty prototype";
+    //创建没有原型的对象
+    var b=Object.create(null);
+    a.split(" ").filter(x=>x).forEach(key=>{
+        if(!b[key]){
+        b[key]=1;
+    }else{
+        b[key]++
     }
-    new a()
+
+
+    })
+    //在console时,在chrome 控制台中不会显示 __proto__,在jsbin的打印中会显示出来
+    console.log(b);
+
+    //但是在遍历的时候会遍历到__proto__
+    for (var pro in b) {
+        console.log(pro);
+        console.log(b[pro]);
+        console.log('------');
+    }
 
 </script>
 </body>

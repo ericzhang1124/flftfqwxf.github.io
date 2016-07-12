@@ -4,6 +4,7 @@ date: 2016-07-12 17:12:26
 tags: javascript
 ---
 
+
 面试题如下:
 
 统计一个字符串中,**字符串内容为随机**,**以空格分格**的词的数量,并以JSON的格式返回
@@ -150,8 +151,41 @@ tags: javascript
                     writable: true,
                     value: 1
                 });
+
+
+
+----------更新,发现更简单的方式------------
+
+使用 Object.create(null)创建完全的空对象
+
+
+    var a="constructor constructor mytest __proto__ __lookupSetter__ __proto__ hasOwnProperty prototype";
+    //创建没有原型的对象
+    //通过这种方式,最简单,但在c
+    var b=Object.create(null);
+    a.split(" ").filter(x=>x).forEach(key=>{
+      if(!b[key]){
+        b[key]=1;
+      }else{
+        b[key]++
+      }
+
+
+    })
+    //在console时,在chrome 控制台中不会显示 __proto__,在jsbin的打印中会显示出来
+    console.log(b);
+
+    //但是在遍历的时候会遍历到__proto__
+    for (var pro in b) {
+        console.log(pro);
+        console.log(b[pro]);
+        console.log('------');
+    }
+
 最终示例:
 
 http://jsbin.com/xewavet/11/edit?html,js,output
 
 http://jsbin.com/xocasu/7/edit?html,js,console,output
+
+http://jsbin.com/sohepe/4/edit?html,js,output
