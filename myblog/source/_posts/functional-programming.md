@@ -1,5 +1,6 @@
 ---
-title: functional-programming
+title: 函数式编程
 date: 2016-07-12 20:42:55
 tags:
 ---
+待更新
