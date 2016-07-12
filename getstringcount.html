@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function a() {
+        var f = () => {'use strict'; return this};
+        console.log(f() === window); // 或全局对象
+    }
+    new a()
+
+</script>
+</body>
+</html>
