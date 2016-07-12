@@ -397,14 +397,7 @@ for (var pro in b) {
     console.log(b[pro]);
     console.log(&apos;------&apos;);
 }
-</code></pre><p><strong>总结:这个题,重点不在统计上,而是在使用JSON来返回数据上,并且要考虑到对象的属性,有些是不可修改和枚举的,故如果遇到与内置属性同名的字段,就需要允许其修改,关键点就在 Object.defineProperty的应用:</strong></p>
-<pre><code>Object.defineProperty(b, c[t], {
-                enumerable: true,
-                configurable: true,
-                writable: true,
-                value: 1
-            });
-</code></pre><p>———-更新,发现更简单的方式————</p>
+</code></pre><p>———-更简单的方式————</p>
 <p>使用 Object.create(null)创建完全的空对象</p>
 <pre><code>var a=&quot;constructor constructor mytest __proto__ __lookupSetter__ __proto__ hasOwnProperty prototype&quot;;
 //创建没有原型的对象
@@ -428,6 +421,19 @@ for (var pro in b) {
     console.log(b[pro]);
     console.log(&apos;------&apos;);
 }
+</code></pre><p>再次更新,使用 map的方式:</p>
+<p>   b = (str) =&gt; str.split(/\s+/g).reduce((a, e) =&gt; a.set(e, a.has(e) ? a.get(e) + 1 : 1), new Map());</p>
+<p>   var r=b(a);<br>   console.log(r);</p>
+<p>   r.forEach(function (val, key, array) {<br>       console.log(key+’:’+val)<br>   })</p>
+<p>*总结:这个题,重点不在统计上,而是在使用JSON来返回数据上,并且要考虑到对象的属性,有些是不可修改和枚举的,故如果遇到与内置属性同名的字段,就需要允许其修改,关键点就在 Object.defineProperty的应用和 Object.create(null)的用法:</p>
+<pre><code>Object.defineProperty(b, c[t], {
+                enumerable: true,
+                configurable: true,
+                writable: true,
+                value: 1
+            });
+
+var b=Object.create(null);
 </code></pre><p>最终示例:</p>
 <p><a href="http://jsbin.com/xewavet/11/edit?html,js,output" target="_blank" rel="external">http://jsbin.com/xewavet/11/edit?html,js,output</a></p>
 <p><a href="http://jsbin.com/xocasu/7/edit?html,js,console,output" target="_blank" rel="external">http://jsbin.com/xocasu/7/edit?html,js,console,output</a></p>

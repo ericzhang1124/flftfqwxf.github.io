@@ -143,18 +143,10 @@ tags: javascript
         console.log('------');
     }
 
-**总结:这个题,重点不在统计上,而是在使用JSON来返回数据上,并且要考虑到对象的属性,有些是不可修改和枚举的,故如果遇到与内置属性同名的字段,就需要允许其修改,关键点就在 Object.defineProperty的应用:**
-
-    Object.defineProperty(b, c[t], {
-                    enumerable: true,
-                    configurable: true,
-                    writable: true,
-                    value: 1
-                });
 
 
 
-----------更新,发现更简单的方式------------
+----------更简单的方式------------
 
 使用 Object.create(null)创建完全的空对象
 
@@ -181,6 +173,29 @@ tags: javascript
         console.log(b[pro]);
         console.log('------');
     }
+
+再次更新,使用 map的方式:
+
+
+   b = (str) => str.split(/\s+/g).reduce((a, e) => a.set(e, a.has(e) ? a.get(e) + 1 : 1), new Map());
+
+   var r=b(a);
+   console.log(r);
+
+   r.forEach(function (val, key, array) {
+       console.log(key+':'+val)
+   })
+
+*总结:这个题,重点不在统计上,而是在使用JSON来返回数据上,并且要考虑到对象的属性,有些是不可修改和枚举的,故如果遇到与内置属性同名的字段,就需要允许其修改,关键点就在 Object.defineProperty的应用和 Object.create(null)的用法:
+
+    Object.defineProperty(b, c[t], {
+                    enumerable: true,
+                    configurable: true,
+                    writable: true,
+                    value: 1
+                });
+
+    var b=Object.create(null);
 
 最终示例:
 
