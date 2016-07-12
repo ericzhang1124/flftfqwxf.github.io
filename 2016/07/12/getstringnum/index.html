@@ -114,7 +114,7 @@ var a=&amp;quot;this is a string and is a xx &amp;quot;;
 }
 面试时第一次想到的答案:
 var a=&amp;quot;this is string test w">
-<meta property="og:updated_time" content="2016-07-12T08:46:01.000Z">
+<meta property="og:updated_time" content="2016-07-12T08:47:43.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="记一次面试中,遇到的一个问题:统计一个字符串中,以空格分格的词的数量,并以JSON的格式返回">
 <meta name="twitter:description" content="面试题如下:
@@ -359,7 +359,7 @@ for(var t=0;t&lt;c.length;t++){
     }
 }
 console.log(b)
-</code></pre><p>这样看好象是对了,但是实际上,还有一个严重问题,如果字符串中存在 <strong>proto</strong>的内容,则无法设置 <strong>proto</strong>的值,因为<strong>proto</strong>的值在默认在初始化后,是只读的。</p>
+</code></pre><p>这样看好象是对了,但是实际上,还有一个严重问题,如果字符串中存在 <strong><strong>proto</strong></strong>的内容,则无法设置 <strong><strong>proto</strong></strong>的值,因为<strong><strong>proto</strong>的值在默认在初始化后,是只读的</strong>。</p>
 <p>于是就有了第三个方案:</p>
 <pre><code>var a=&quot;constructor constructor __proto__ __lookupSetter__ hasOwnProperty prototype&quot;;
 //通过JSON.parse初始化对象时,设置__proto__
