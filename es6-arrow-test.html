@@ -130,7 +130,11 @@
 //   }
 
 
-   b = (str) => str.split(/\s+/g).reduce((a, e) => a.set(e, a.has(e) ? a.get(e) + 1 : 1), new Map());
+   //b = (str) => str.split(/\s+/g).reduce((a, e) => a.set(e, a.has(e) ? a.get(e) + 1 : 1), new Map());
+
+   b = (str) => str.split(/\s+/g).reduce(function (preval, curval) {
+       return preval.set(curval,preval.has(curval) ? preval.get(curval)+1 :1)
+   },new Map());
 
    var r=b(a);
    console.log(r);

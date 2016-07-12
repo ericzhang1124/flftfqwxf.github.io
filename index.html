@@ -238,6 +238,99 @@
             
               
                 
+                <a class="post-title-link" href="/2016/07/12/functional-programming/" itemprop="url">
+                  functional-programming
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-12T20:42:55+08:00" content="2016-07-12">
+              2016-07-12
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/07/12/getstringnum/" itemprop="url">
                   记一次面试中,遇到的一个问题:统计一个字符串中,以空格分格的词的数量,并以JSON的格式返回
                 </a>
@@ -423,8 +516,58 @@ for (var pro in b) {
 }
 </code></pre><p>再次更新,使用 map的方式:</p>
 <p>   b = (str) =&gt; str.split(/\s+/g).reduce((a, e) =&gt; a.set(e, a.has(e) ? a.get(e) + 1 : 1), new Map());</p>
-<p>   var r=b(a);<br>   console.log(r);</p>
+<pre><code>//上面代码等同于:
+b = (str) =&gt; str.split(/\s+/g).reduce((a, e) =&gt; a.set(e, a.has(e) ? a.get(e) + 1 : 1), new Map());
+</code></pre><p>   var r=b(a);<br>   console.log(r);</p>
 <p>   r.forEach(function (val, key, array) {<br>       console.log(key+’:’+val)<br>   })</p>
+<p>这种方法相对复杂,需要了解一些以下API:</p>
+<p>Map的用法:</p>
+<p>现在很多时候会将Map来代替 var a={},来创建对象</p>
+<p>常用的API</p>
+<p> var m=new Map();<br> m.get(key);<br> m.set(key,val)<br> map.has(key)<br> map.delete(key)<br> map.forEach() 与 Array.forEach用法相同</p>
+<p>数组 API reduce的用法</p>
+<p>reduce :累加器</p>
+<pre><code>arr.reduce(callback,[initialValue])
+</code></pre><p>参数</p>
+<p>callback</p>
+<p>执行数组中每个值的函数，包含四个参数</p>
+<blockquote>
+<p>previousValue</p>
+<p>上一次调用回调返回的值，或者是提供的初始值（initialValue）</p>
+<p>currentValue</p>
+<p>数组中当前被处理的元素</p>
+<p>index</p>
+<p>当前元素在数组中的索引</p>
+<p>array</p>
+<p>调用 reduce 的数组</p>
+</blockquote>
+<p>initialValue</p>
+<p>作为第一次调用 callback 的第一个参数。</p>
+<p>示例一:</p>
+<pre><code>var a=[1,2,3,4];
+
+
+a.reduce(function(previousValue,currentValue) {
+    //此示例中,第一个previousValue 为1,currentValue为2
+    //第二次循环中, previousValue为 上一次循环中return 的值,currentValue则3,以此类推
+  return previousValue+currentValue;
+})
+</code></pre><p>示例二:</p>
+<pre><code>var a=[1,2,3,4];
+a.reduce(function(previousValue,currentValue) {
+    //此示例中,第一个previousValue 为15,currentValue为1
+   //第二次循环中, previousValue为 上一次循环中return 的值,currentValue则3,以此类推
+   return previousValue+currentValue;
+},15)
+</code></pre><p>与示例一不同,此处设置了 initialValue的值为 15,则在循环开始,则以此初始化为开始,以此类推</p>
+<p>示例三,初始值不仅可以是数字,也可以是任何你想传数的格式:</p>
+<pre><code>var a=[1,2,3,4];
+a.reduce(function(previousValue,currentValue) {
+    //previousValue为数组,并且将后续的值都添加到这个数组中
+    //第一次return 时,将数组return ,后面所有的累加都是在这个数组上不断return 不断类加
+   return previousValue.push(currentValue);
+},[])
+</code></pre><p>根据以上示例,你可以对数据做更多处理,代码也更简洁</p>
 <p>*总结:这个题,重点不在统计上,而是在使用JSON来返回数据上,并且要考虑到对象的属性,有些是不可修改和枚举的,故如果遇到与内置属性同名的字段,就需要允许其修改,关键点就在 Object.defineProperty的应用和 Object.create(null)的用法:</p>
 <pre><code>Object.defineProperty(b, c[t], {
                 enumerable: true,
@@ -1197,7 +1340,7 @@ document.addEventListener(&quot;DOMContentLoaded&quot;, function(event) {
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">5</span>
+              <span class="site-state-item-count">6</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

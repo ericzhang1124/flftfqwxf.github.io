@@ -179,12 +179,97 @@ tags: javascript
 
    b = (str) => str.split(/\s+/g).reduce((a, e) => a.set(e, a.has(e) ? a.get(e) + 1 : 1), new Map());
 
+    //上面代码等同于:
+    b = (str) => str.split(/\s+/g).reduce((a, e) => a.set(e, a.has(e) ? a.get(e) + 1 : 1), new Map());
    var r=b(a);
    console.log(r);
 
    r.forEach(function (val, key, array) {
        console.log(key+':'+val)
    })
+
+这种方法相对复杂,需要了解一些以下API:
+
+Map的用法:
+
+现在很多时候会将Map来代替 var a={},来创建对象
+
+常用的API
+
+ var m=new Map();
+ m.get(key);
+ m.set(key,val)
+ map.has(key)
+ map.delete(key)
+ map.forEach() 与 Array.forEach用法相同
+
+数组 API reduce的用法
+
+reduce :累加器
+
+    arr.reduce(callback,[initialValue])
+
+参数
+
+callback
+
+执行数组中每个值的函数，包含四个参数
+
+>previousValue
+
+>上一次调用回调返回的值，或者是提供的初始值（initialValue）
+
+>currentValue
+
+>数组中当前被处理的元素
+
+>index
+
+>当前元素在数组中的索引
+
+>array
+
+>调用 reduce 的数组
+
+initialValue
+
+作为第一次调用 callback 的第一个参数。
+
+示例一:
+
+    var a=[1,2,3,4];
+
+
+    a.reduce(function(previousValue,currentValue) {
+        //此示例中,第一个previousValue 为1,currentValue为2
+        //第二次循环中, previousValue为 上一次循环中return 的值,currentValue则3,以此类推
+      return previousValue+currentValue;
+    })
+
+
+
+示例二:
+
+    var a=[1,2,3,4];
+    a.reduce(function(previousValue,currentValue) {
+        //此示例中,第一个previousValue 为15,currentValue为1
+       //第二次循环中, previousValue为 上一次循环中return 的值,currentValue则3,以此类推
+       return previousValue+currentValue;
+    },15)
+
+与示例一不同,此处设置了 initialValue的值为 15,则在循环开始,则以此初始化为开始,以此类推
+
+示例三,初始值不仅可以是数字,也可以是任何你想传数的格式:
+
+    var a=[1,2,3,4];
+    a.reduce(function(previousValue,currentValue) {
+        //previousValue为数组,并且将后续的值都添加到这个数组中
+        //第一次return 时,将数组return ,后面所有的累加都是在这个数组上不断return 不断类加
+       return previousValue.push(currentValue);
+    },[])
+
+根据以上示例,你可以对数据做更多处理,代码也更简洁
+
 
 *总结:这个题,重点不在统计上,而是在使用JSON来返回数据上,并且要考虑到对象的属性,有些是不可修改和枚举的,故如果遇到与内置属性同名的字段,就需要允许其修改,关键点就在 Object.defineProperty的应用和 Object.create(null)的用法:
 
