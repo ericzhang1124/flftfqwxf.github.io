@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="javascript es6," />
+  <meta name="keywords" content="es6 Map Set," />
 
 
 
@@ -84,52 +84,25 @@
 
 
 
-<meta name="description" content="之前对es6的箭头函数的使用总是生硬和一知半解,今天疏理一下。
-格式的本质:
-箭头函数的左边是要传递给function的参数箭头函数的右边是要执行的函数
-右侧不同的区别,比较三种不同:
-var a=1;
-var b=a=&amp;gt;a+1;
-上面相当于:
-function b(a) {
-    return a+1;
-}
-右方带括号与不带括号的区别:
-var a2=1;
-var b2=a2=&amp;gt;{">
+<meta name="description" content="在es6中,多了两种数据结构 Set和Map
+先说Set,Set是类似数组的数据结构,有以下特点:
+1) Set只有键值,没有键名2) Set的值是唯一的,如果重复则只存一个3) Set中 NaN被认为是不相同的值4) 可以将数组或类似数组的集合转换成Set5) IE兼容性不好6) Set不能使用索引来获取值,只能通过遍历,如forEach,keys等
+//set 类似数组的数据结构, set没有">
 <meta property="og:type" content="article">
-<meta property="og:title" content="es6 箭头函数详解">
-<meta property="og:url" content="http://yoursite.com/2016/07/08/es6-arrow-function/index.html">
+<meta property="og:title" content="javascript 数据结构 Set Map">
+<meta property="og:url" content="http://yoursite.com/2016/07/13/setandmap/index.html">
 <meta property="og:site_name" content="猫宅的@橱窗">
-<meta property="og:description" content="之前对es6的箭头函数的使用总是生硬和一知半解,今天疏理一下。
-格式的本质:
-箭头函数的左边是要传递给function的参数箭头函数的右边是要执行的函数
-右侧不同的区别,比较三种不同:
-var a=1;
-var b=a=&amp;gt;a+1;
-上面相当于:
-function b(a) {
-    return a+1;
-}
-右方带括号与不带括号的区别:
-var a2=1;
-var b2=a2=&amp;gt;{">
-<meta property="og:updated_time" content="2016-07-08T12:51:55.000Z">
+<meta property="og:description" content="在es6中,多了两种数据结构 Set和Map
+先说Set,Set是类似数组的数据结构,有以下特点:
+1) Set只有键值,没有键名2) Set的值是唯一的,如果重复则只存一个3) Set中 NaN被认为是不相同的值4) 可以将数组或类似数组的集合转换成Set5) IE兼容性不好6) Set不能使用索引来获取值,只能通过遍历,如forEach,keys等
+//set 类似数组的数据结构, set没有">
+<meta property="og:updated_time" content="2016-07-13T10:40:37.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="es6 箭头函数详解">
-<meta name="twitter:description" content="之前对es6的箭头函数的使用总是生硬和一知半解,今天疏理一下。
-格式的本质:
-箭头函数的左边是要传递给function的参数箭头函数的右边是要执行的函数
-右侧不同的区别,比较三种不同:
-var a=1;
-var b=a=&amp;gt;a+1;
-上面相当于:
-function b(a) {
-    return a+1;
-}
-右方带括号与不带括号的区别:
-var a2=1;
-var b2=a2=&amp;gt;{">
+<meta name="twitter:title" content="javascript 数据结构 Set Map">
+<meta name="twitter:description" content="在es6中,多了两种数据结构 Set和Map
+先说Set,Set是类似数组的数据结构,有以下特点:
+1) Set只有键值,没有键名2) Set的值是唯一的,如果重复则只存一个3) Set中 NaN被认为是不相同的值4) 可以将数组或类似数组的集合转换成Set5) IE兼容性不好6) Set不能使用索引来获取值,只能通过遍历,如forEach,keys等
+//set 类似数组的数据结构, set没有">
 
 
 
@@ -150,9 +123,9 @@ var b2=a2=&amp;gt;{">
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/07/08/es6-arrow-function/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/07/13/setandmap/"/>
 
-  <title> es6 箭头函数详解 | 猫宅的@橱窗 </title>
+  <title> javascript 数据结构 Set Map | 猫宅的@橱窗 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -282,7 +255,7 @@ var b2=a2=&amp;gt;{">
             
             
               
-                es6 箭头函数详解
+                javascript 数据结构 Set Map
               
             
           </h1>
@@ -294,8 +267,8 @@ var b2=a2=&amp;gt;{">
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-08T17:20:01+08:00" content="2016-07-08">
-              2016-07-08
+            <time itemprop="dateCreated" datetime="2016-07-13T17:37:10+08:00" content="2016-07-13">
+              2016-07-13
             </time>
           </span>
 
@@ -305,8 +278,8 @@ var b2=a2=&amp;gt;{">
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/07/08/es6-arrow-function/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/08/es6-arrow-function/" itemprop="commentsCount"></span>
+                <a href="/2016/07/13/setandmap/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/13/setandmap/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -329,155 +302,118 @@ var b2=a2=&amp;gt;{">
       
 
       
-        <p>之前对es6的箭头函数的使用总是生硬和一知半解,今天疏理一下。</p>
-<p>格式的本质:</p>
-<p>箭头函数的左边是要传递给function的参数<br>箭头函数的右边是要执行的函数</p>
-<p>右侧不同的区别,比较三种不同:</p>
-<pre><code>var a=1;
-var b=a=&gt;a+1;
-</code></pre><p>上面相当于:</p>
-<pre><code>function b(a) {
-    return a+1;
-}
-</code></pre><p>右方带括号与不带括号的区别:</p>
-<pre><code>var a2=1;
-var b2=a2=&gt;{a2+1};
-</code></pre><p>上面相当于:</p>
-<pre><code>function b2(a2) {
-    a2+1;
-}
-</code></pre><p>即,如果右侧出现{}的代码块,则不会自动return 右侧function最后的值</p>
-<p>右方带圆括号的不同:<br>    var a3=1;<br>    var b3=a3=&gt;(a3);</p>
-<p>上面相当于:</p>
-<pre><code>function b(a) {
-    return a;
-}
-</code></pre><p>之所以要使用(),是在如果返回值是一个带{}的对象时,{}被识别成一个代码块<br>如:</p>
-<pre><code>var a4=1;
-var b4=a4=&gt;({r:1,a4:a4});
-</code></pre><p>错误格式:</p>
-<pre><code>var a4=1;
-var b4=a4=&gt;{r:1,a4:a4};
-</code></pre><p>箭头函数左侧:</p>
-<p>如果是没有或多个参数需要传递,则使用():</p>
-<pre><code>var r=()=&gt;5;
-var r1=(a,b)=&gt;a+b;
-</code></pre><p>上面相当于:</p>
-<pre><code>function r1() {
-    return 5;
-}
-function r2(a, b) {
-    return a + b;
-}
-</code></pre><p>复杂的箭头函数:</p>
-<pre><code>const f1=()=&gt;{return &apos;first&apos;};
-const f2=()=&gt;{return &apos;second&apos;};
-const f3=()=&gt;{return &apos;three&apos;}
-const result=r1=&gt;r2=&gt;r3=&gt;{
- console.log(r1())
- console.log(r2())
- console.log(r3())
-}
+        <p>在es6中,多了两种数据结构 Set和Map</p>
+<p>先说Set,Set是类似数组的数据结构,有以下特点:</p>
+<p>1) Set只有键值,没有键名<br>2) Set的值是唯一的,如果重复则只存一个<br>3) Set中 NaN被认为是不相同的值<br>4) 可以将数组或类似数组的集合转换成Set<br>5) IE兼容性不好<br>6) Set不能使用索引来获取值,只能通过遍历,如forEach,keys等</p>
+<pre><code>//set 类似数组的数据结构, set没有键名，只有值
+//set 不能像数组一样通过索引获取到值，只能遍历
+//与数组不同的是，它的值必须是唯一的，如果有重复，则只存储一个
+var set = new Set([1, 2, 3, 4, 4]);
 
-//console.log(result)
-console.log(result(f1)(f2))
-</code></pre><p>上面相当于:</p>
-<pre><code>function result(r1) {
-return function (r2) {
-  return function (r3) {
-    console.log(r1());
-    console.log(r2());
-    console.log(r3());
-  };
-};
-}
-</code></pre><h3 id="箭头函数的this指针"><a href="#箭头函数的this指针" class="headerlink" title="箭头函数的this指针:"></a>箭头函数的this指针:</h3><p>很多文章说,箭头函数的this是固定的,并且函数体内的this对象，就是定义时所在的对象，而不是使用时所在的对象,这个一直是似懂非懂。下面做一下疏理。</p>
-<p>如下代码:</p>
-<pre><code>function foo(r) {
+//常用API
+set.add({a:3})
+console.log([...set])
+//判断是否存在
+console.log(set.has(1))
 
-  setTimeout(() =&gt; {
-    console.log(&apos;=&gt;&apos;+this);
-  }, 100);
-}
-foo.call({r:1});
-foo()
-new foo()
-function foo2(r) {
-  setTimeout(function() {
-    console.log(&apos;not arrow:&apos;+this);
-  }, 100);
+set.clear()
+//set.delete()
+var divs=new Set(document.querySelectorAll(&quot;.e&quot;))
+
+//在jsbin不会输出，但是在单写在网页中会输出
+divs.forEach(val=&gt;{console.log(val.innerHTML)})
+</code></pre><p>###Map</p>
+<p>Object和MAP的比较:</p>
+<p>Object和Map类似的一点是,它们都允许你按键存取一个值,都可以删除键,还可以检测一个键是否绑定了值.因此,一直以来,我们都把对象当成Map来使用,不过,现在有了Map,下面的区别解释了为什么使用Map更好点.</p>
+<blockquote>
+<p>一个对象通常都有自己的原型,所以一个对象总有一个”prototype”键.不过,现在可以使用map = Object.create(null)来创建一个没有原型的对象.<br>一个对象的键只能是字符串,但一个Map的键可以是任意值.<br>你可以很容易的得到一个Map的键值对个数,而只能跟踪一个对象的键值对个数</p>
+</blockquote>
+<p>1) JSON对象的键名只能是字符串,如果键名是对象则会被强制 toString(),如:</p>
+<pre><code>var data = {};
+var element = document.getElementById(&quot;myDiv&quot;);
+
+data[element] = metadata;
+data[&quot;[Object HTMLDivElement]&quot;] // metadata
+</code></pre><p>上面代码原意是将一个DOM节点作为对象data的键，但是由于对象只接受字符串作为键名，所以element被自动转为字符串[Object HTMLDivElement]。</p>
+<p>2) 如果对同一个键多次赋值，后面的值将覆盖前面的值。</p>
+<p>3) 只有对同一个对象的引用，Map结构才将其视为同一个键。这一点要非常小心。</p>
+<pre><code>var map = new Map();
+
+map.set([&apos;a&apos;], 555);
+map.get([&apos;a&apos;]) // undefined
+</code></pre><p>4) 常用API与Set一致</p>
+<p>set与map的区别:</p>
+<p>set是只有键值的数据结构,而map则是必须包括 键名和键值<br>set的值是唯一的,map如果重复则后面覆盖前面</p>
+<p>###与其他数据结构的互相转换<br>（1）Map转为数组</p>
+<p>前面已经提过，Map转为数组最方便的方法，就是使用扩展运算符（…）。</p>
+<pre><code>let myMap = new Map().set(true, 7).set({foo: 3}, [&apos;abc&apos;]);
+[...myMap]
+// [ [ true, 7 ], [ { foo: 3 }, [ &apos;abc&apos; ] ] ]
+</code></pre><p>（2）数组转为Map</p>
+<p>将数组转入Map构造函数，就可以转为Map。</p>
+<pre><code>new Map([[true, 7], [{foo: 3}, [&apos;abc&apos;]]])
+// Map {true =&gt; 7, Object {foo: 3} =&gt; [&apos;abc&apos;]}
+</code></pre><p>（3）Map转为对象</p>
+<p>如果所有Map的键都是字符串，它可以转为对象。</p>
+<pre><code>function strMapToObj(strMap) {
+  let obj = Object.create(null);
+  for (let [k,v] of strMap) {
+    obj[k] = v;
   }
-foo2.call({r:1})
-new foo2()
-</code></pre><p>运行会发现,foo的运行结果 this是变化的, 而 foo2运行时的this,反而是不变的。<br>原因是什么??</p>
-<p>关键在于【定义时】和【运行时】,如何简单区分【定义时】和【运行时】,以一个方法为例:</p>
-<pre><code>function a(){
-  b+c
-}
-</code></pre><p>首先,【编译时】会解析a方法是否有语法错误,在这个方法中,但是如果不执行 a(),并不会报错,说明b和c在此时并没有被初始化,即不在【定义时】,<br>而当执行a() 时,是方法a的【运行时】,但对于a内部的b,c才开始【定义时】,故会检查到b,c不存在报错</p>
-<p>将上面代码作下注释:</p>
-<pre><code>function foo(r) {
-
-  //setTimeout的定义是在foo执行时，即如果没有调用foo方法，即setTimeout根本没有定义，此点一定要记清楚
-  setTimeout(() =&gt; {
-    console.log(&apos;=&gt;&apos;+this);
-  }, 100);
+  return obj;
 }
 
-//foo调用并指定了通过call指定this为{r:1}
-//运行到内部setTimeout开始定义，故此时箭头函数内的this就是 {r:1}
-foo.call({r:1});
-//直接调用 foo执行内部this指向window,setTimeout开始定义时，也就指向了window
-foo()
-//运行foo时，this指向foo内部
-new foo()
+let myMap = new Map().set(&apos;yes&apos;, true).set(&apos;no&apos;, false);
+strMapToObj(myMap)
+// { yes: true, no: false }
+（4）对象转为Map
 
-function foo2(r) {
-
-  setTimeout(function() {
-    console.log(&apos;not arrow:&apos;+this);
-  }, 100);
+function objToStrMap(obj) {
+  let strMap = new Map();
+  for (let k of Object.keys(obj)) {
+    strMap.set(k, obj[k]);
   }
+  return strMap;
+}
 
-foo2.call({r:1})
-new foo2()
-</code></pre><p>根据上面注释,说明一定要先确认什么时候才是定义时,什么时候是运行时,foo()是foo本身的运行时,但内部的setTimeout是在foo()调用之后才开始初始化定义的,故foo执行时的this是什么就会影响到setTimeout的箭头函数的this。</p>
-<p>####再看两个示例:</p>
-<p>此示例说明,箭头函数的this是不变的:</p>
-<pre><code>var adder = {
-  base : 1,
+objToStrMap({yes: true, no: false})
+// [ [ &apos;yes&apos;, true ], [ &apos;no&apos;, false ] ]
+</code></pre><p>（5）Map转为JSON</p>
+<p>Map转为JSON要区分两种情况。一种情况是，Map的键名都是字符串，这时可以选择转为对象JSON。</p>
+<pre><code>function strMapToJson(strMap) {
+  return JSON.stringify(strMapToObj(strMap));
+}
 
-  add : function(a) {
-    var f = v =&gt; v + this.base;
-    return f(a);
-  },
+let myMap = new Map().set(&apos;yes&apos;, true).set(&apos;no&apos;, false);
+strMapToJson(myMap)
+// &apos;{&quot;yes&quot;:true,&quot;no&quot;:false}&apos;
+另一种情况是，Map的键名有非字符串，这时可以选择转为数组JSON。
 
-  addThruCall: function(a) {
-    var f = v =&gt; v + this.base;
-    var b = {
-      base : 2
-    };
-    //这里的b改变了 this但并不会影响到 f函数
-    return f.call(b, a);
-  }
-};
-console.log(adder.add(1));         // 输出 2
-console.log(adder.addThruCall(1)); // 仍然输出 2（而不是3）
-</code></pre><p>在上面示例中,adder.addThruCall(1)执行时,f才开始初始化定义,并且此时的this指向adder对象,而箭头函数的初化后定义后this指向即固定,所以即使在后面使用【f.call(b, a)】修改this也无效</p>
-<p>简单示例:</p>
-<pre><code>var f = () =&gt; {
-  console.log(this)
-};
+function mapToArrayJson(map) {
+  return JSON.stringify([...map]);
+}
 
-f.call({r:1})//this 依然为window
-</code></pre><p>严格模式下,箭头函数的this 规则将被忽略:</p>
-<pre><code>var f = () =&gt; {&apos;use strict&apos;; return this};
-console.log(&apos;arror:&apos;+f())
+let myMap = new Map().set(true, 7).set({foo: 3}, [&apos;abc&apos;]);
+mapToArrayJson(myMap)
+// &apos;[[true,7],[{&quot;foo&quot;:3},[&quot;abc&quot;]]]&apos;
+</code></pre><p>（6）JSON转为Map</p>
+<p>JSON转为Map，正常情况下，所有键名都是字符串。</p>
+<pre><code>function jsonToStrMap(jsonStr) {
+  return objToStrMap(JSON.parse(jsonStr));
+}
 
-var f2 = function ()
-{&apos;use strict&apos;; return this};
-console.log(&apos;no arrow:&apos;+f2())
-</code></pre>
+jsonToStrMap(&apos;{&quot;yes&quot;:true,&quot;no&quot;:false}&apos;)
+// Map {&apos;yes&apos; =&gt; true, &apos;no&apos; =&gt; false}
+</code></pre><p>但是，有一种特殊情况，整个JSON就是一个数组，且每个数组成员本身，又是一个有两个成员的数组。这时，它可以一一对应地转为Map。这往往是数组转为JSON的逆操作。</p>
+<pre><code>function jsonToMap(jsonStr) {
+  return new Map(JSON.parse(jsonStr));
+}
+
+jsonToMap(&apos;[[true,7],[{&quot;foo&quot;:3},[&quot;abc&quot;]]]&apos;)
+// Map {true =&gt; 7, Object {foo: 3} =&gt; [&apos;abc&apos;]}
+</code></pre><p>参考资源:</p>
+<p><a href="http://es6.ruanyifeng.com/#docs/set-map" target="_blank" rel="external">http://es6.ruanyifeng.com/#docs/set-map</a><br><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Map" target="_blank" rel="external">https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Map</a></p>
+
       
     </div>
 
@@ -498,7 +434,7 @@ console.log(&apos;no arrow:&apos;+f2())
       
         <div class="post-tags">
           
-            <a href="/tags/javascript-es6/" rel="tag">#javascript es6</a>
+            <a href="/tags/es6-Map-Set/" rel="tag">#es6 Map Set</a>
           
         </div>
       
@@ -507,17 +443,13 @@ console.log(&apos;no arrow:&apos;+f2())
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/07/05/intellijerror/" rel="next" title="intellij IDEA 错误:requested without authorization, you can copy URL and open it in browser to trust it.解决办法">
-                <i class="fa fa-chevron-left"></i> intellij IDEA 错误:requested without authorization, you can copy URL and open it in browser to trust it.解决办法
+              <a href="/2016/07/12/functional-programming/" rel="next" title="函数式编程">
+                <i class="fa fa-chevron-left"></i> 函数式编程
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/07/09/redux-middleware/" rel="prev" title="redux middleware 中间件">
-                redux middleware 中间件 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -543,8 +475,8 @@ console.log(&apos;no arrow:&apos;+f2())
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/07/08/es6-arrow-function/"
-           data-title="es6 箭头函数详解" data-url="http://yoursite.com/2016/07/08/es6-arrow-function/">
+      <div class="ds-thread" data-thread-key="2016/07/13/setandmap/"
+           data-title="javascript 数据结构 Set Map" data-url="http://yoursite.com/2016/07/13/setandmap/">
       </div>
     
   </div>
@@ -628,7 +560,7 @@ console.log(&apos;no arrow:&apos;+f2())
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#箭头函数的this指针"><span class="nav-number">1.</span> <span class="nav-text">箭头函数的this指针:</span></a></li></ol></div>
+              <p class="post-toc-empty">此文章未包含目录</p>
             
           </div>
         </section>

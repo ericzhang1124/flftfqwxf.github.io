@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>es6 Set DEMO</title>
+</head>
+<body>
+
+Set 数据类型 DEMO
+
+<div class="e">1</div>
+<div  class="e">2</div>
+<div  class="e">4</div>
+<div  class="e">3</div>
+
+
+<script>
+    //set 类似数组的数据结构, set没有键名，只有值
+    //set 不能像数组一样通过索引获取到值，只能遍历
+    //与数组不同的是，它的值必须是唯一的，如果有重复，则只存储一个
+    var set = new Set([1, 2, 3, 4, 4]);
+
+
+    //添加
+    set.add({a:3})
+    console.log([...set])
+    //判断是否存在
+    console.log(set.has(1))
+
+
+    var divs=new Set(document.querySelectorAll(".e"))
+
+    divs.forEach(val=>{console.log(val.innerHTML)})
+
+
+</script>
+</body>
+</html>

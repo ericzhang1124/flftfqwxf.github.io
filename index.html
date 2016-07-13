@@ -248,6 +248,217 @@
             
               
                 
+                <a class="post-title-link" href="/2016/07/13/setandmap/" itemprop="url">
+                  javascript 数据结构 Set Map
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-13T17:37:10+08:00" content="2016-07-13">
+              2016-07-13
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/13/setandmap/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/13/setandmap/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>在es6中,多了两种数据结构 Set和Map</p>
+<p>先说Set,Set是类似数组的数据结构,有以下特点:</p>
+<p>1) Set只有键值,没有键名<br>2) Set的值是唯一的,如果重复则只存一个<br>3) Set中 NaN被认为是不相同的值<br>4) 可以将数组或类似数组的集合转换成Set<br>5) IE兼容性不好<br>6) Set不能使用索引来获取值,只能通过遍历,如forEach,keys等</p>
+<pre><code>//set 类似数组的数据结构, set没有键名，只有值
+//set 不能像数组一样通过索引获取到值，只能遍历
+//与数组不同的是，它的值必须是唯一的，如果有重复，则只存储一个
+var set = new Set([1, 2, 3, 4, 4]);
+
+//常用API
+set.add({a:3})
+console.log([...set])
+//判断是否存在
+console.log(set.has(1))
+
+set.clear()
+//set.delete()
+var divs=new Set(document.querySelectorAll(&quot;.e&quot;))
+
+//在jsbin不会输出，但是在单写在网页中会输出
+divs.forEach(val=&gt;{console.log(val.innerHTML)})
+</code></pre><p>###Map</p>
+<p>Object和MAP的比较:</p>
+<p>Object和Map类似的一点是,它们都允许你按键存取一个值,都可以删除键,还可以检测一个键是否绑定了值.因此,一直以来,我们都把对象当成Map来使用,不过,现在有了Map,下面的区别解释了为什么使用Map更好点.</p>
+<blockquote>
+<p>一个对象通常都有自己的原型,所以一个对象总有一个”prototype”键.不过,现在可以使用map = Object.create(null)来创建一个没有原型的对象.<br>一个对象的键只能是字符串,但一个Map的键可以是任意值.<br>你可以很容易的得到一个Map的键值对个数,而只能跟踪一个对象的键值对个数</p>
+</blockquote>
+<p>1) JSON对象的键名只能是字符串,如果键名是对象则会被强制 toString(),如:</p>
+<pre><code>var data = {};
+var element = document.getElementById(&quot;myDiv&quot;);
+
+data[element] = metadata;
+data[&quot;[Object HTMLDivElement]&quot;] // metadata
+</code></pre><p>上面代码原意是将一个DOM节点作为对象data的键，但是由于对象只接受字符串作为键名，所以element被自动转为字符串[Object HTMLDivElement]。</p>
+<p>2) 如果对同一个键多次赋值，后面的值将覆盖前面的值。</p>
+<p>3) 只有对同一个对象的引用，Map结构才将其视为同一个键。这一点要非常小心。</p>
+<pre><code>var map = new Map();
+
+map.set([&apos;a&apos;], 555);
+map.get([&apos;a&apos;]) // undefined
+</code></pre><p>4) 常用API与Set一致</p>
+<p>set与map的区别:</p>
+<p>set是只有键值的数据结构,而map则是必须包括 键名和键值<br>set的值是唯一的,map如果重复则后面覆盖前面</p>
+<p>###与其他数据结构的互相转换<br>（1）Map转为数组</p>
+<p>前面已经提过，Map转为数组最方便的方法，就是使用扩展运算符（…）。</p>
+<pre><code>let myMap = new Map().set(true, 7).set({foo: 3}, [&apos;abc&apos;]);
+[...myMap]
+// [ [ true, 7 ], [ { foo: 3 }, [ &apos;abc&apos; ] ] ]
+</code></pre><p>（2）数组转为Map</p>
+<p>将数组转入Map构造函数，就可以转为Map。</p>
+<pre><code>new Map([[true, 7], [{foo: 3}, [&apos;abc&apos;]]])
+// Map {true =&gt; 7, Object {foo: 3} =&gt; [&apos;abc&apos;]}
+</code></pre><p>（3）Map转为对象</p>
+<p>如果所有Map的键都是字符串，它可以转为对象。</p>
+<pre><code>function strMapToObj(strMap) {
+  let obj = Object.create(null);
+  for (let [k,v] of strMap) {
+    obj[k] = v;
+  }
+  return obj;
+}
+
+let myMap = new Map().set(&apos;yes&apos;, true).set(&apos;no&apos;, false);
+strMapToObj(myMap)
+// { yes: true, no: false }
+（4）对象转为Map
+
+function objToStrMap(obj) {
+  let strMap = new Map();
+  for (let k of Object.keys(obj)) {
+    strMap.set(k, obj[k]);
+  }
+  return strMap;
+}
+
+objToStrMap({yes: true, no: false})
+// [ [ &apos;yes&apos;, true ], [ &apos;no&apos;, false ] ]
+</code></pre><p>（5）Map转为JSON</p>
+<p>Map转为JSON要区分两种情况。一种情况是，Map的键名都是字符串，这时可以选择转为对象JSON。</p>
+<pre><code>function strMapToJson(strMap) {
+  return JSON.stringify(strMapToObj(strMap));
+}
+
+let myMap = new Map().set(&apos;yes&apos;, true).set(&apos;no&apos;, false);
+strMapToJson(myMap)
+// &apos;{&quot;yes&quot;:true,&quot;no&quot;:false}&apos;
+另一种情况是，Map的键名有非字符串，这时可以选择转为数组JSON。
+
+function mapToArrayJson(map) {
+  return JSON.stringify([...map]);
+}
+
+let myMap = new Map().set(true, 7).set({foo: 3}, [&apos;abc&apos;]);
+mapToArrayJson(myMap)
+// &apos;[[true,7],[{&quot;foo&quot;:3},[&quot;abc&quot;]]]&apos;
+</code></pre><p>（6）JSON转为Map</p>
+<p>JSON转为Map，正常情况下，所有键名都是字符串。</p>
+<pre><code>function jsonToStrMap(jsonStr) {
+  return objToStrMap(JSON.parse(jsonStr));
+}
+
+jsonToStrMap(&apos;{&quot;yes&quot;:true,&quot;no&quot;:false}&apos;)
+// Map {&apos;yes&apos; =&gt; true, &apos;no&apos; =&gt; false}
+</code></pre><p>但是，有一种特殊情况，整个JSON就是一个数组，且每个数组成员本身，又是一个有两个成员的数组。这时，它可以一一对应地转为Map。这往往是数组转为JSON的逆操作。</p>
+<pre><code>function jsonToMap(jsonStr) {
+  return new Map(JSON.parse(jsonStr));
+}
+
+jsonToMap(&apos;[[true,7],[{&quot;foo&quot;:3},[&quot;abc&quot;]]]&apos;)
+// Map {true =&gt; 7, Object {foo: 3} =&gt; [&apos;abc&apos;]}
+</code></pre><p>参考资源:</p>
+<p><a href="http://es6.ruanyifeng.com/#docs/set-map" target="_blank" rel="external">http://es6.ruanyifeng.com/#docs/set-map</a><br><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Map" target="_blank" rel="external">https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Map</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/07/12/functional-programming/" itemprop="url">
                   函数式编程
                 </a>
@@ -1404,7 +1615,7 @@ document.addEventListener(&quot;DOMContentLoaded&quot;, function(event) {
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-count">7</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1414,7 +1625,7 @@ document.addEventListener(&quot;DOMContentLoaded&quot;, function(event) {
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
