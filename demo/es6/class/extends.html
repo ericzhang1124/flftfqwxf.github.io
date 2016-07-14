@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function r(){
+        console.log('this is function')
+    }
+
+    class a extends r {
+        constructor(){
+            super()
+        }
+    }
+    const b=new a()
+
+
+    class u extends Date {
+        constructor(){
+            super()
+            console.log(super.getFullYear ())
+        }
+    }
+
+    const subDate=new u()
+
+</script>
+</body>
+</html>

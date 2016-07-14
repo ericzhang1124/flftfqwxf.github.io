@@ -1,0 +1,820 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="es6 class," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="ES6中,创建类将更接近其他语言,使用class关键词,其本质可以理解为语法糖。所有有class关键词定义的类,在ES5中使用function同样可以定义。
+下面总结一下class的特点及与function定义类的不同:
+语法:
+class Bar {
+  // class内的内容强制要求为严格模式
+  //如果在class中，没有定义constructor，则会默认创建一个空的 construc">
+<meta property="og:type" content="article">
+<meta property="og:title" content="es6 class总结">
+<meta property="og:url" content="http://yoursite.com/2016/07/14/es6-class/index.html">
+<meta property="og:site_name" content="猫宅的@橱窗">
+<meta property="og:description" content="ES6中,创建类将更接近其他语言,使用class关键词,其本质可以理解为语法糖。所有有class关键词定义的类,在ES5中使用function同样可以定义。
+下面总结一下class的特点及与function定义类的不同:
+语法:
+class Bar {
+  // class内的内容强制要求为严格模式
+  //如果在class中，没有定义constructor，则会默认创建一个空的 construc">
+<meta property="og:updated_time" content="2016-07-14T11:49:13.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="es6 class总结">
+<meta name="twitter:description" content="ES6中,创建类将更接近其他语言,使用class关键词,其本质可以理解为语法糖。所有有class关键词定义的类,在ES5中使用function同样可以定义。
+下面总结一下class的特点及与function定义类的不同:
+语法:
+class Bar {
+  // class内的内容强制要求为严格模式
+  //如果在class中，没有定义constructor，则会默认创建一个空的 construc">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/07/14/es6-class/"/>
+
+  <title> es6 class总结 | 猫宅的@橱窗 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?019f8af9f4eda6117bb2c1cc33e5b9be";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">猫宅的@橱窗</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                es6 class总结
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-14T15:58:49+08:00" content="2016-07-14">
+              2016-07-14
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/14/es6-class/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/14/es6-class/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>ES6中,创建类将更接近其他语言,使用class关键词,其本质可以理解为语法糖。所有有class关键词定义的类,在ES5中使用function同样可以定义。</p>
+<p>下面总结一下class的特点及与function定义类的不同:</p>
+<p>语法:</p>
+<pre><code>class Bar {
+  // class内的内容强制要求为严格模式
+  //如果在class中，没有定义constructor，则会默认创建一个空的 constructor函数
+  constructor(){
+    //正常情况下，由于严格模式要求，变量必须显示声明
+    //此写法会报错，ReferenceError: myname is not defined
+    //但由于浏览器目前对ES6的语法支持不完善，在使用 babel等进行转义后，并不会报错，
+    myname=4
+    console.log(&apos;this is constructor&apos;+myname)
+  }
+  doStuff() {
+    console.log(&apos;stuff&apos;);
+  }
+
+  pro(){
+    this.x=1;
+    this.y=2;
+  }
+}
+
+var b = new Bar();
+console.log(b)
+b.pro()
+console.log(b.hasOwnProperty(&apos;x&apos;))
+
+//类表达式
+const myclass=class m {
+
+  getName(){
+   return m.name
+  }
+
+}
+
+var c=new myclass()
+console.log(c.getName())
+</code></pre><p>1) 类和模块的内部,默认为严格模式,比如在严格模式,变量必须显示声明,否则会报错,ReferenceError: myname is not defined,示例中【myname】处,但由于浏览器目前对ES6的语法支持不完善，在使用 babel等进行转换为ES5后，并不会报错。<br>2) constructor 构建函数,在 new myclass()时,会调用一次,一个类只能拥有一个名为 constructor 的方法，否则会抛出 SyntaxError 异常。<br>3) constructor 默认返回实例对象（即this），完全可以指定返回另外一个对象</p>
+<pre><code>class Foo {
+  constructor() {
+    return Object.create(null);
+  }
+}
+
+new Foo() instanceof Foo
+</code></pre><p>4) 如果class中没有显示声明constructor,则会默认生成一个空的constructor函数<br>5) ES5中,new一个实例,默认其指向的constructor为,定义的function(),故:</p>
+<pre><code>class Cat {
+    constructor(){
+        this.x=1
+    }
+}
+
+//与上面代码等同
+function (){
+    this.x=1
+}
+</code></pre><p>5) 使用 class 定义的属性或方法,都是在其prototype上定义,只有通过[this]定义的属性才会在实例上,同时由于所有方法默认都定义在原型上,所以可以通过修改原型上的方法来为实例添加或修改方法:</p>
+<pre><code>class a {
+    func(){
+        this.x=1
+        this.y=2
+    }
+
+}
+
+function a() {
+
+}
+a.prototype.func=function(){
+
+}
+</code></pre><p>6) class与 function定义的类不同, function定义时,会有变量提升,而class不会,即class的定义一定要在实例化之前,否则会报错</p>
+<p>7) function和class皆可以通过<strong>proto</strong>来修改原型的方法,达到修改实例的目录,但不推荐使用,推荐使用继承的方式,下面会讲到,  <a href="http://jsbin.com/yodolum/12/edit?html,js,console" target="_blank" rel="external">在线示例</a></p>
+<pre><code>class Bar {
+  constructor(){
+
+  }
+  getName(){
+    return &apos;myName&apos;
+  }
+}
+
+var a=new Bar()
+var b=new Bar()
+console.log(&apos;a:&apos;+a.getName())
+console.log(&apos;b:&apos;+b.getName())
+
+//修改原型上的方法，两个实例上调用都会被修改
+a.__proto__.getName=function(){
+
+  return &apos;getName is modify&apos;
+}
+
+
+console.log(&apos;a:&apos;+a.getName())
+console.log(&apos;b:&apos;+b.getName())
+</code></pre><p>8) class和 function 上,除了 通过[this]定义在实例上的属性外,其他都是不可枚举的,至于哪些是不可枚举的属性(不可枚举的属性的判断及使用,在其他文章中讨论),<a href="http://jsbin.com/jekifo/2/edit?html,js,console" target="_blank" rel="external">在线示例</a></p>
+<pre><code>class cat {
+  constructor(){
+    this.x=1
+    this.y=2
+  }
+}
+const b=new cat()
+console.log(Object.keys(b))//[&quot;x&quot;, &quot;y&quot;]
+
+function fish(){
+
+  this.fx=1;
+  this.fy=2
+}
+fish.fh=5
+fish.prototype.a=5
+console.log(Object.keys(new fish()))//[&quot;fx&quot;, &quot;fy&quot;]
+</code></pre><h3 id="class的继承"><a href="#class的继承" class="headerlink" title="class的继承"></a>class的继承</h3><p> 通过使用 <strong>extend</strong> 关键词,<a href="http://jsbin.com/rexumaz/2/edit?html,js,console" target="_blank" rel="external">在线示例</a></p>
+<pre><code> class animal {
+
+  constructor(sex,age,color,weight){
+    this.sex=sex;
+    this.age=age;
+    this.color=color;
+    this.weight=weight;
+  }
+  getSex(){
+    return this.sex;
+  }
+
+}
+
+ class Cat extends animal{
+  constructor(sex,age,color,weight,category){
+    super(sex,age,color,weight)
+    this.category=category
+  }
+   getPro(){
+
+     return Object.keys(this)
+   }
+}
+
+const cat = new Cat(&apos;male&apos;,4,&apos;black&apos;,&apos;4kg&apos;,&apos;china&apos;)
+
+console.log(cat.getSex())
+console.log(cat.getPro())
+</code></pre><p><strong>ES5的继承，实质是先创造子类的实例对象this，然后再将父类的方法添加到this上面（Parent.apply(this)）。ES6的继承机制完全不同，实质是先创造父类的实例对象this（所以必须先调用super方法），然后再用子类的构造函数修改this。</strong></p>
+<p>如果子类没有定义constructor方法，这个方法会被默认添加，代码如下。也就是说，不管有没有显式定义，任何一个子类都有constructor方法。</p>
+<pre><code>constructor(...args) {
+  super(...args);
+}
+</code></pre><p>super的用法和注意事项,<a href="http://jsbin.com/dacicoj/9/edit?html,js,console" target="_blank" rel="external">在线示例</a>:</p>
+<pre><code>class a{
+  constructor(){
+    console.log(&apos;this is a&apos;);
+    this.x=&apos;x&apos;;
+    this.y=&apos;y&apos;;
+  }
+  get(pro){
+    return this[pro];
+  }
+}
+class b extends a{
+
+  constructor(){
+    //直接调用时，相当于父类的constructor调用
+    super();
+    //作为对象调用时，可以引用父类实例的属性和方法，也可以引用父类的静态方法
+    //注意:使用super无法引用父级通过[this]设置的值，
+    console.log(super.x)//undefine
+    //只能引用父类非 [this]下的方法或属性
+    //而在class中，只能定义函数，无法定义变量值，
+    //故只能引用父有的方法
+     console.log(super.get(&apos;x&apos;))//x
+     console.log(this.get())
+  }
+  get(){
+    return &apos;sub get&apos;
+  }
+}
+const c=new b()
+//console.log(c.get())
+</code></pre><p>1) class只能定义方法,不能定义属性,定义属性只能通过[this],区别在于 class定义的方法在子类的中,可以通过 super.functionName()的方式来引用,而通过 【this】定义的则不能<br>2) 直接调用时[super(…args)]，相当于父类的constructor调用<br>3) 作为对象调用时，可以引用父类实例的属性和方法，也可以引用父类的静态方法<br>4) 注意:使用super无法引用父级通过[this]设置的值<br>5) 如果子类定义了与父类同名的方法名,可以用 super.xxx和 this.xxx来区分父类和子类的同名方法<br>6) 判断一个类是否继承另一个类,Object.getPrototypeOf方法可以用来从子类上获取父类。</p>
+<pre><code>Object.getPrototypeOf(ColorPoint) === Point
+// true
+</code></pre><h3 id="class-继承不同类型"><a href="#class-继承不同类型" class="headerlink" title="class 继承不同类型:"></a>class 继承不同类型:</h3><p>使用class继承和使用es5继承的区别:<br>使用class继承:<br>先</p>
+<pre><code>function r(){
+  console.log(&apos;this is function&apos;)
+}
+
+class a extends r {
+  constructor(){
+    super()
+  }
+}
+const b=new a()
+
+//继承原生类在 babel模式下会报错，在javascript模式下，CHROME正常
+class u extends Date {
+  constructor(){
+    super()
+   console.log(super.getFullYear())
+  }
+}
+
+const subDate=new u()
+</code></pre>
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/es6-class/" rel="tag">#es6 class</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/13/setandmap/" rel="next" title="javascript 数据结构 Set Map">
+                <i class="fa fa-chevron-left"></i> javascript 数据结构 Set Map
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/07/14/es6-class/"
+           data-title="es6 class总结" data-url="http://yoursite.com/2016/07/14/es6-class/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="沧浪的羽毛" />
+          <p class="site-author-name" itemprop="name">沧浪的羽毛</p>
+          <p class="site-description motion-element" itemprop="description">自律强于努力</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#class的继承"><span class="nav-number">1.</span> <span class="nav-text">class的继承</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#class-继承不同类型"><span class="nav-number">2.</span> <span class="nav-text">class 继承不同类型:</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">沧浪的羽毛</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"flftfqwxf"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>
